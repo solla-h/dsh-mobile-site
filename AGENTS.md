@@ -13,7 +13,7 @@
 
 ## 事实来源（只读）
 
-页面和文档只使用以下绝对地址，不要复制 App 源码或素材：
+产品事实使用以下绝对地址，不复制 App 源码；宠物素材仅允许下文已授权的例外，素材来源与许可链接见 `site/media/ATTRIBUTION.txt`：
 
 - App 仓库：<https://github.com/solla-h/dsh-mobile-app>
 - APK 唯一来源：[Releases](https://github.com/solla-h/dsh-mobile-app/releases)
@@ -39,14 +39,19 @@
 
 - 不放真实主机地址、配对码/二维码、设备标识、账号、密钥或用户对话。
 - 截图必须脱敏，并明确标注「真机截图」或「界面示意」；示意图不能冒充截图。
-- **不要复制 App 的 `assets/pet/` 宠物素材**：它们是 CC BY-NC-SA 4.0，仅限非商业，
-  不随本仓库的 MIT 许可。需要视觉素材时自行制作或明确授权后再用。
+- **宠物素材仅限已授权的非商业展示**：用户于 2026-11-07 允许按 CC BY-NC-SA 4.0
+  引入必要的大肥鱼素材，随后选择可操作的网页演示。目前使用 `site/media/da-fei-yu.webp`
+  静态帧，以及 `da-fei-yu-idle.webp`、`da-fei-yu-happy.webp` 原动画；来源、改动及署名
+  见 `site/media/ATTRIBUTION.txt` 和 `NOTICE`。该素材及衍生图不属于 MIT，须保持署名、
+  非商业和相同方式共享条件；不得据此批量复制 App 素材或改为商业用途。
 - 不虚构用户数量、评价、性能指标或未验证的能力；不宣称系统推送、后台常驻、
   永不断线、零数据留存、应用商店发行或所有机型兼容。
 
 ## 工程约定
 
-- 纯静态 HTML/CSS；不引入 npm、框架或构建步骤。后续确需工具时必须说明理由。
+- 静态 HTML/CSS；用户已允许宠物、插件翻页、弧形会话三项示意使用少量原生 JavaScript。
+  演示只使用虚构数据，不访问真实网关、创建真实会话或修改插件；失去脚本后仍应可读。
+  不引入 npm、框架或构建步骤。纯手势逻辑以 Node 内置断言检查，不需要安装依赖。
 - 本地预览只用 `python -m http.server --bind 127.0.0.1 --directory site 4173`。
 - 提交前运行 `python3 -I scripts/check_site.py`（Windows 用 `python -I`）。
 - 未获授权时不 commit/push；push 前须获同意。已有本轮明确的提交或推送授权时，按授权范围执行。
@@ -54,5 +59,5 @@
 
 ## 许可
 
-本仓库内容 MIT（见 [LICENSE](LICENSE)）。App 原创代码 MIT；宠物素材
-CC BY-NC-SA 4.0 仅限非商业，本网站不得复制。
+本仓库原创代码与文案 MIT（见 [LICENSE](LICENSE)）。App 原创代码 MIT；本站使用的
+大肥鱼素材单独采用 CC BY-NC-SA 4.0，仅限非商业，不纳入 MIT；见 [NOTICE](NOTICE)。
