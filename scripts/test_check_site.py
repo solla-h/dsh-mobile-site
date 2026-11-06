@@ -158,6 +158,14 @@ def test_noindex_fails() -> None:
     assert result.returncode != 0 and "noindex" in result.stdout, result.stdout
 
 
+def test_missing_pet_animation_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(site / "index.html", "</body>", '<img alt="" data-idle="missing-pet.webp"></body>')
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "missing-pet.webp" in result.stdout, result.stdout
+
+
 def main() -> int:
     tests = (
         test_valid_fixture_passes,
@@ -166,6 +174,7 @@ def main() -> int:
         test_broken_jsonld_fails,
         test_missing_sitemap_url_fails,
         test_chinese_in_english_page_fails,
+        test_missing_pet_animation_fails,
     )
     for test in tests:
         test()

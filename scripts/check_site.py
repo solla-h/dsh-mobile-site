@@ -49,6 +49,9 @@ URL_ATTRS = {
     ("link", "href"),
     ("script", "src"),
     ("img", "src"),
+    ("img", "data-still"),
+    ("img", "data-idle"),
+    ("img", "data-happy"),
     ("source", "src"),
     ("video", "poster"),
 }

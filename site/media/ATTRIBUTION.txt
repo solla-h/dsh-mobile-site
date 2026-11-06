@@ -1,0 +1,36 @@
+﻿Pet artwork attribution / 宠物素材署名
+
+Files / 文件 (264 x 296):
+- da-fei-yu.webp: static first frame / 静态首帧
+- da-fei-yu-idle.webp: original idle animation / 原版待机动画
+- da-fei-yu-happy.webp: original reaction animation / 原版回应动画
+Character / 形象: 大肥鱼 (Da Fei Yu), a whale-girl fan character.
+Original character / 原型: 溟月, by 上善无形 on Bilibili.
+DeepSeek adaptation / DeepSeek 版设计: ZipZipPipe on Bilibili.
+Animation source / 动画来源: dsh-pet
+https://github.com/PC2005-cloud/dsh-pet
+
+This site's image was extracted from the first frame of fish-idle.webp
+in DSH Mobile App. That app cropped, resized and converted the upstream
+animation to WebP. This site converted the idle first frame to a single,
+non-animated WebP. The idle and happy animations are otherwise unchanged
+copies of the app's fish-idle.webp and fish-happy.webp, renamed as above.
+本站从 App 的 fish-idle.webp 提取首帧，转换为单帧静态 WebP。
+两段动画分别来自 fish-idle.webp、fish-happy.webp，仅重命名，未修改内容。
+App 对上游动画做过裁切、缩放和格式转换；详情及署名记录：
+https://github.com/solla-h/dsh-mobile-app/blob/c7acacb4410895ab3d176861a293b532dc246ddd/assets/pet/README.md
+
+License / 许可: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+International (CC BY-NC-SA 4.0)
+https://creativecommons.org/licenses/by-nc-sa/4.0/
+Legal code / 许可全文:
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+The pet artwork, including this static derivative, is NOT covered by the
+website's MIT license. Reuse requires attribution, non-commercial use,
+and ShareAlike licensing of adaptations under the terms above. This
+non-commercial website uses the artwork to illustrate its presence in
+the app; no endorsement by the artists or DeepSeek is implied.
+宠物原素材及本站静态衍生图不属于网站 MIT 许可范围。再使用时须按上述
+许可署名、仅用于非商业用途，并对改编作品采用相同许可。本站用于非商业
+展示 App 中的宠物形象，不表示原作者或 DeepSeek 为本项目背书。

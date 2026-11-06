@@ -64,6 +64,7 @@
               Get the Android APK
             </a>
             <a class="link-quiet" href="#start">Install &amp; pair <span aria-hidden="true">→</span></a>
+            <a class="link-quiet" href="#highlights">Try the demos <span aria-hidden="true">↓</span></a>
           </div>
           <ul class="terms" aria-label="Before you start">
             <li>Requires your own DSH host with the mobile gateway plugin</li>
@@ -109,8 +110,11 @@
                   </div>
                 </div>
                 <div class="ui-orb-wrap">
-                  <span class="ui-orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
-                  <span class="ui-orb-label">Hold to talk to start a session</span>
+                  <div class="ui-pet-dock">
+                    <img src="../media/da-fei-yu.webp" width="264" height="296" alt="">
+                    <span class="ui-orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
+                  </div>
+                  <span class="ui-orb-label">Double-tap the pet for a new chat · Hold the mic to talk</span>
                 </div>
                 <div class="ui-tabs">
                   <span class="is-on">Focus</span><span>Sessions</span><span>Schedules</span><span>Plugins</span>
@@ -120,6 +124,89 @@
           </div>
           <figcaption class="plate"><b>English illustration</b><span>Not a device screenshot. Gateway, folders and sessions are fictional. The illustrations on this page are translated; the app itself currently uses Simplified Chinese.</span></figcaption>
         </figure>
+      </div>
+    </section>
+
+    <!-- Pet and gestures -->
+    <section class="section" id="highlights" aria-labelledby="highlights-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Details for your phone</p>
+          <div>
+            <h2 id="highlights-title" class="display">Meet the pet. Try the gestures.</h2>
+            <p class="intro">Greet the pet, swipe through plugin cards, and switch conversations from the side. These interactive web illustrations use fictional data; they never create real conversations or change plugins.</p>
+          </div>
+        </div>
+        <div class="highlights">
+          <article class="highlight" data-pet-demo data-reacted="Da Fei Yu reacted to your tap." data-moved="Da Fei Yu moved to a new spot." data-created="A fictional chat is open. No real conversation was created." data-reset="Demo reset. Da Fei Yu is back in the middle.">
+            <figure>
+              <div class="highlight__visual demo-visual">
+                <div class="pet-demo__stage" data-pet-stage>
+                  <div class="pet-demo__chat" data-pet-chat hidden><b>New chat · Demo</b><p>Ready for a new conversation.</p></div>
+                  <button class="pet-demo__pet" type="button" data-pet-button disabled aria-label="Da Fei Yu: tap for a reaction, double-tap for a demo chat, or drag sideways">
+                    <img src="../media/da-fei-yu.webp" data-pet-image data-still="../media/da-fei-yu.webp" data-idle="../media/da-fei-yu-idle.webp" data-happy="../media/da-fei-yu-happy.webp" width="264" height="296" loading="lazy" draggable="false" alt="Da Fei Yu, a blue-haired pet with a whale tail">
+                  </button>
+                </div>
+                <span class="gesture-hint">Tap to greet · Double-tap for a chat · Drag sideways</span>
+                <div class="demo-controls" data-demo-controls hidden>
+                  <button type="button" data-pet-new>New demo chat</button><button type="button" data-pet-reset>Reset</button>
+                  <label class="demo-motion"><input type="checkbox" data-pet-motion> Play the original idle animation</label>
+                </div>
+                <p class="demo-status" data-pet-status role="status">All conversations here are fictional.</p>
+              </div>
+              <figcaption>Interactive web illustration with original app artwork · <a href="../media/ATTRIBUTION.txt">Credits and non-commercial license</a></figcaption>
+            </figure>
+            <h3>Meet Da Fei Yu.</h3>
+            <p>Tap for a reaction, double-tap for a new chat, or swipe sideways to move the pet. Say hello; the buttons above provide an alternative too.</p>
+          </article>
+          <article class="highlight" data-plugin-demo>
+            <figure>
+              <div class="highlight__visual demo-visual">
+                <div class="plugin-demo__zone" data-plugin-zone tabindex="0" role="group" aria-label="Plugin detail demo: drag sideways or use the left and right arrow keys">
+                  <div class="plugin-preview" data-plugin-card hidden><span class="ui-tag">Plugin details · Demo</span><h4>Example plugin A</h4><p>Explore an extension and its requirements.</p><p>This is the first item. The cards do not wrap around.</p></div>
+                  <div class="plugin-preview" data-plugin-card><span class="ui-tag">Plugin details · Demo</span><h4>Example plugin B</h4><p>Read about features and settings.</p><p>There are cards on both sides. Try dragging this one.</p></div>
+                  <div class="plugin-preview" data-plugin-card hidden><span class="ui-tag">Plugin details · Demo</span><h4>Example plugin C</h4><p>Discover the next extension.</p><p>This is the last item. Swipe right to go back.</p></div>
+                </div>
+                <span class="gesture-hint">← Swipe left for next · Right for previous →</span>
+                <div class="demo-controls" data-demo-controls hidden>
+                  <button type="button" data-plugin-prev>Previous</button><output data-plugin-count>2 / 3</output><button type="button" data-plugin-next>Next</button><button type="button" data-plugin-reset>Reset</button>
+                </div>
+                <p class="demo-status" data-plugin-status role="status">Example plugin B. No plugins will be changed.</p>
+              </div>
+              <figcaption>Interactive web illustration with fictional plugins, not connected to a host</figcaption>
+            </figure>
+            <h3>One plugin card after another.</h3>
+            <p>Swipe left for the next item or right for the previous one. Drag and release a card, or try the buttons and arrow keys.</p>
+            <p class="highlight__note">In the app, available items and management permissions depend on your host.</p>
+          </article>
+          <article class="highlight" data-arc-demo data-opened="Menu open. Pick a conversation, or drag the right-side handle up or down." data-cancelled="Menu closed. Your original conversation is unchanged.">
+            <figure>
+              <div class="highlight__visual demo-visual">
+                <div class="arc-preview arc-demo__stage">
+                  <div class="arc-demo__conversation" data-arc-panel hidden><span class="ui-tag">Demo chat</span><h4>Reading notes</h4><p>Summarize this chapter for me.</p><p class="arc-demo__reply">Three notes are ready for you.</p></div>
+                  <div class="arc-demo__conversation" data-arc-panel><span class="ui-tag ui-tag--live">Demo chat</span><h4>Fix CI cache</h4><p>Keep checking the cache settings.</p><p class="arc-demo__reply">Putting the findings together.</p></div>
+                  <div class="arc-demo__conversation" data-arc-panel hidden><span class="ui-tag ui-tag--amber">Demo chat</span><h4>Migrate orders</h4><p>Show me the migration plan first.</p><p class="arc-demo__reply">The plan is ready for your review.</p></div>
+                  <div class="arc-demo__menu" id="arc-demo-menu" data-arc-menu hidden>
+                    <span class="arc-preview__track" aria-hidden="true"></span>
+                    <button class="arc-preview__item" type="button" data-arc-option data-index="0" aria-pressed="false"><span class="ui-tag">Recent</span><b>Reading notes</b></button>
+                    <button class="arc-preview__item" type="button" data-arc-option data-index="1" aria-pressed="true"><span class="ui-tag ui-tag--live">Running</span><b>Fix CI cache</b></button>
+                    <button class="arc-preview__item" type="button" data-arc-option data-index="2" aria-pressed="false"><span class="ui-tag ui-tag--amber">Approval</span><b>Migrate orders</b></button>
+                    <button class="arc-demo__close" type="button" data-arc-close>Close</button>
+                  </div>
+                  <button class="arc-preview__handle" type="button" data-arc-handle disabled aria-label="Open the conversation menu, or hold and drag up or down" aria-expanded="false" aria-controls="arc-demo-menu">↕</button>
+                </div>
+                <span class="gesture-hint">Tap the right handle · Drag up or down, release to switch</span>
+                <p class="demo-status" data-arc-status role="status">Current demo chat: Fix CI cache.</p>
+              </div>
+              <figcaption>Interactive web illustration. Click the background or Close to cancel; arrow keys and Esc work too.</figcaption>
+            </figure>
+            <h3>Your conversations, at the side.</h3>
+            <p>Open the menu from the right and pick a demo conversation. Or hold the handle, drag up or down, then release to open your selection.</p>
+            <p class="highlight__note">In the app, close the keyboard first. The menu shows up to 10 conversations from the current filtered list.</p>
+          </article>
+        </div>
+        <p class="highlights__caption">Interactive English illustrations, not recordings of the app. The actual app interface is currently in Simplified Chinese.</p>
+        <noscript><p class="highlights__caption">This is a static preview. Enable JavaScript to operate the demos; the descriptions remain available below.</p></noscript>
       </div>
     </section>
 
@@ -374,7 +461,7 @@
             </details>
             <details>
               <summary>How is it licensed?</summary>
-              <div class="answer"><p>The app&rsquo;s original code is MIT. Its pet animation assets are CC BY-NC-SA 4.0, non-commercial only; see <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/LICENSE">LICENSE</a> and <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/NOTICE">NOTICE</a>. This website is MIT and does not use those assets.</p></div>
+              <div class="answer"><p>The app&rsquo;s original code is MIT. Its pet animation assets are CC BY-NC-SA 4.0, non-commercial only; see <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/LICENSE">LICENSE</a> and <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/NOTICE">NOTICE</a>. This website&rsquo;s original content is MIT. The displayed pet artwork is separately licensed under CC BY-NC-SA 4.0, not MIT; see the <a href="../media/ATTRIBUTION.txt">artwork credits and license</a>.</p></div>
             </details>
             <details>
               <summary>Where do I report a problem?</summary>
@@ -410,7 +497,7 @@
       <div>
         <p class="brand"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile App</p>
         <p>Public Android alpha. An independent open-source project, not affiliated with DeepSeek or Expo.</p>
-        <p>App code MIT; pet assets CC BY-NC-SA 4.0, non-commercial only, not used on this site. Site content MIT.</p>
+        <p>Original app and site code and text: MIT. The displayed pet artwork: CC BY-NC-SA 4.0, non-commercial only. <a href="../media/ATTRIBUTION.txt">Artwork credits and license</a></p>
         <p>This site uses <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a> for page traffic and performance, without cookies to identify visitors.</p>
       </div>
       <nav aria-label="Footer">
@@ -422,5 +509,6 @@
       </nav>
     </div>
   </footer>
+  <script type="module" src="../demo.mjs"></script>
 </body>
 </html>

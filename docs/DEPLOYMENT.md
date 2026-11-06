@@ -12,7 +12,7 @@
 | 正式域名 | `fatwhale.app`（已关联 Pages；Cloudflare DNS 的根域 CNAME 指向下列 Pages 主机名） |
 | Pages 主机名 | `dsh-mobile-site-5cm.pages.dev`（注意自动分配的 `-5cm` 后缀） |
 | 可部署目录 | `site/`（仓库根目录不是产物） |
-| 构建 | 无框架、无 npm；纯静态 HTML/CSS |
+| 构建 | 无框架、无 npm、无生成步骤；静态 HTML/CSS 与原生 JavaScript 演示 |
 | APK | 不在本仓库；继续由 App 的 GitHub Releases 分发（约 103 MB，超过 Pages 单文件上限） |
 
 ## Pages 项目配置
@@ -30,8 +30,9 @@
 | Build watch paths | Include `site/*`、`scripts/check_site.py`；Exclude 留空 |
 | Preview deployments | 非 `main` 分支自动生成预览（默认公开、带 `X-Robots-Tag: noindex`） |
 
-GitHub Actions 的 `site-ci / check` 在 PR、push 到 `main` 和手动触发时执行检查。
-Pages 不等待 GitHub CI，因此在自己的 Build command 中重跑同一脚本：检查失败时
+GitHub Actions 的 `site-ci / check` 在 PR、push 到 `main` 和手动触发时执行静态检查器回归、
+Node 内置断言的演示手势检查，以及站点资源检查，不安装 npm 依赖。
+Pages 不等待 GitHub CI，因此在自己的 Build command 中重跑静态资源检查脚本：检查失败时
 该次部署失败，不替换当前生产站。`main` 当前未设置分支保护；不要把 CI 当成合并限制。
 
 ## 发布记录（2026-11-07，UTC+8）
