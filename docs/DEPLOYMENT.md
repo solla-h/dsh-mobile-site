@@ -73,6 +73,13 @@ Pages 自动更新正式站。小改动也走同一路径，便于定位线上�
 只改文档或 GitHub workflow 时跳过 Pages 构建；修改 `scripts/check_site.py` 会触发重新检查。
 预览地址默认公开，`noindex` 只是防索引，不是访问控制；预览中不要放秘密。
 
+## 搜索与统计
+
+页面使用正式品牌 DSH Mobile App，提供 robots、sitemap 与站点名称结构化数据。
+Cloudflare Web Analytics 已在 Pages 中启用，随之后的 Git 部署自动注入；不要在 HTML
+再手动添加同一信标。查看 Metrics → View Web Analytics，按 Host 筛选 `fatwhale.app`。
+搜索策略、指标口径、隐私边界、验证结果与 Search Console 待办见 [DISCOVERY.md](DISCOVERY.md)。
+
 ## 回滚
 
 1. 在 Cloudflare Dashboard 打开项目的 **Deployments**。

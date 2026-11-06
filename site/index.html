@@ -4,20 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://fatwhale.app/">
-  <title>DSH Mobile — 不在桌前，也跟得上你的 DSH</title>
-  <meta name="description" content="DSH Mobile 是第三方、开源的 DeepSeek Harness（DSH）Android 客户端：在手机上查看进度、处理审批与提问、继续对话。连接你自己运行的 DSH 宿主，当前为 Android 公开 alpha。">
+  <title>DSH Mobile App — DeepSeek Harness 第三方 Android 客户端</title>
+  <meta name="description" content="DSH Mobile App 是配套 DeepSeek Harness（DSH）的第三方开源 Android 客户端：查看进度、处理审批与提问、继续对话。需要自建宿主和手机网关；当前为公开 alpha，通过 GitHub Releases 侧载安装。">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f4f2ed" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#252522" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
-  <meta property="og:site_name" content="DSH Mobile">
-  <meta property="og:title" content="DSH Mobile — 不在桌前，也跟得上你的 DSH">
-  <meta property="og:description" content="第三方开源的 DSH Android 客户端：查看进度、处理审批、继续对话。Android 公开 alpha。">
+  <meta property="og:site_name" content="DSH Mobile App">
+  <meta property="og:title" content="DSH Mobile App — DeepSeek Harness 第三方 Android 客户端">
+  <meta property="og:description" content="配套 DeepSeek Harness 的第三方开源 Android 客户端：查看进度、处理审批、继续对话。需要自建宿主和手机网关，当前为公开 alpha。">
   <meta property="og:url" content="https://fatwhale.app/">
   <link rel="alternate" hreflang="zh-CN" href="https://fatwhale.app/">
   <link rel="alternate" hreflang="en" href="https://fatwhale.app/en/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f4f2ed'/%3E%3Crect x='10' y='5.5' width='12' height='21' rx='3.5' fill='none' stroke='%231c1c1a' stroke-width='2'/%3E%3Ccircle cx='16' cy='22' r='1.8' fill='%233f7a52'/%3E%3C/svg%3E">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://fatwhale.app/#website",
+      "name": "DSH Mobile App",
+      "url": "https://fatwhale.app/",
+      "inLanguage": ["zh-CN", "en"]
+    }
+  </script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,7 +35,7 @@
 
   <header class="masthead">
     <div class="wrap masthead__inner">
-      <a class="brand" href="./"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile</a>
+      <a class="brand" href="./"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile App</a>
       <nav class="nav" aria-label="主要导航">
         <a href="#scenes">能做什么</a>
         <a href="#start">开始使用</a>
@@ -44,7 +54,7 @@
           <p class="eyebrow">DeepSeek Harness 的第三方手机客户端</p>
           <h1 id="hero-title" class="display"><span class="nb">不在桌前，</span><br><span class="nb">也跟得上你的 DSH。</span></h1>
           <p class="lede">
-            Agent 照常在你自己的宿主上运行。DSH Mobile 让你在 Android 手机上看清什么在跑、什么在等你拍板，再接着说下一句。
+            DSH Mobile App 是配套 DeepSeek Harness（DSH）的第三方开源 Android 客户端。Agent 在你自己的宿主上运行；离开电脑后，用手机查看进度、处理审批与提问，再继续对话。
           </p>
           <div class="actions">
             <a class="btn btn--primary" href="https://github.com/solla-h/dsh-mobile-app/releases">
@@ -260,7 +270,7 @@
         <ol class="steps">
           <li class="step">
             <h3>准备好 DSH 宿主</h3>
-            <p>一台持续运行 DSH Web 的电脑或服务器。DSH Mobile 不自带模型，也不托管任何服务，Agent 始终在这台机器上执行。</p>
+            <p>一台持续运行 DSH Web 的电脑或服务器。DSH Mobile App 不自带模型，也不托管任何服务，Agent 始终在这台机器上执行。</p>
             <div class="links">
               <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">查看版本兼容</a>
             </div>
@@ -305,8 +315,12 @@
           <div class="spacer"></div>
           <div class="faq">
             <details>
+              <summary>DSH Mobile App 与 DeepSeek Harness 是什么关系？</summary>
+              <div class="answer"><p>DeepSeek Harness（DSH）运行在你自己的电脑或服务器上。DSH Mobile App 是与它配套的第三方 Android 客户端，通过手机网关连接 DSH Web，让你查看会话、处理审批与提问、继续对话。它不是 DeepSeek 官方聊天 App，也不提供托管的模型服务。</p></div>
+            </details>
+            <details>
               <summary>这是 DeepSeek 官方的 App 吗？</summary>
-              <div class="answer"><p>不是。DSH Mobile 是独立的第三方开源项目，与 DeepSeek、Expo 官方均无关联。</p></div>
+              <div class="answer"><p>不是。DSH Mobile App 是独立的第三方开源项目，与 DeepSeek、Expo 官方均无关联。</p></div>
             </details>
             <details>
               <summary>我需要准备什么？</summary>
@@ -381,9 +395,10 @@
   <footer class="footer">
     <div class="wrap footer__grid">
       <div>
-        <p class="brand"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile</p>
+        <p class="brand"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile App</p>
         <p>Android 公开 alpha。独立开源项目，与 DeepSeek、Expo 官方无关。</p>
         <p>App 原创代码 MIT；宠物素材 CC BY-NC-SA 4.0，仅限非商业使用，本站未使用。本站内容 MIT。</p>
+        <p>本站使用 <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a> 统计页面访问与性能，不使用 Cookie 识别访客。</p>
       </div>
       <nav aria-label="页脚链接">
         <a href="https://github.com/solla-h/dsh-mobile-app">App 源码</a>
