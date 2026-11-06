@@ -1,7 +1,7 @@
 # 部署：Cloudflare Pages Git 集成
 
-> 上线准备：已核验 Wrangler 认证及 Cloudflare GitHub 集成对本仓库的访问权限。
-> Pages 项目与正式域名状态以本文「发布记录」为准。
+> 已于 2026-11-07（UTC+8）上线：<https://fatwhale.app/>。
+> Pages 使用 GitHub 集成；GitHub Actions 与 Pages 都执行仓库的静态检查。
 
 ## 仓库与产物
 
@@ -9,7 +9,8 @@
 | --- | --- |
 | GitHub 仓库 | `solla-h/dsh-mobile-site` |
 | 生产分支 | `main` |
-| 正式域名 | `fatwhale.app`（已由用户持有并托管在 Cloudflare；尚未绑定本站） |
+| 正式域名 | `fatwhale.app`（已关联 Pages；Cloudflare DNS 的根域 CNAME 指向下列 Pages 主机名） |
+| Pages 主机名 | `dsh-mobile-site-5cm.pages.dev`（注意自动分配的 `-5cm` 后缀） |
 | 可部署目录 | `site/`（仓库根目录不是产物） |
 | 构建 | 无框架、无 npm；纯静态 HTML/CSS |
 | APK | 不在本仓库；继续由 App 的 GitHub Releases 分发（约 103 MB，超过 Pages 单文件上限） |
@@ -20,7 +21,7 @@
 
 | 设置 | 值 |
 | --- | --- |
-| 项目名 | `dsh-mobile-site`（创建时确认可用） |
+| 项目名 | `dsh-mobile-site` |
 | Production branch | `main` |
 | Root directory | 留空（仓库根目录） |
 | Framework preset | None |
@@ -33,11 +34,25 @@ GitHub Actions 的 `site-ci / check` 在 PR、push 到 `main` 和手动触发时
 Pages 不等待 GitHub CI，因此在自己的 Build command 中重跑同一脚本：检查失败时
 该次部署失败，不替换当前生产站。`main` 当前未设置分支保护；不要把 CI 当成合并限制。
 
-## 发布记录
+## 发布记录（2026-11-07，UTC+8）
 
-- 本地中文和英文页面检查通过，已准备 `fatwhale.app` 的 canonical 与语言链接。
-- Cloudflare GitHub 集成可以访问 `solla-h/dsh-mobile-site`；待提交页面后创建 Pages 项目。
-- 正式域名尚未绑定；需授权后核查现有 DNS、Worker 路由与重定向，再绑定并验证。
+- [首次发布 PR #1](https://github.com/solla-h/dsh-mobile-site/pull/1) 已通过 CI 并合入 `main`，页面提交为 `e4850a625a99d21f94d538c093de585ade21d8dc`。
+- Pages 项目已连接 `solla-h/dsh-mobile-site`，`main` 自动部署已启用；命令、输出目录和路径过滤均已回读核对。
+- 首次生产部署 `490ca691-9df6-4d59-a8da-4ceb9884eaa1` 成功；同一提交的 GitHub `check` 和 `Cloudflare Pages` 检查均为 success。
+- 绑定前核查：域名无 DNS 记录、Worker 路由、Single Redirect Rules 或 Page Rules。通过 Pages 自定义域名流程添加根域 CNAME，关联 `fatwhale.app`；未配置 `www`。
+- **源码确认 / CLI 实测：** 本地检查通过（2 HTML、1 CSS、8 个本地引用）；临时副本删除样式后，检查按预期以非零状态退出。正式域名 `/`、`/en/`、`/styles.css` 均能通过有效 HTTPS 获取，内容与提交文件逐字节一致；HTTP `/en/` 返回 301 到对应 HTTPS 地址。
+- **浏览器实测：** 正式中文首页可打开；360px 移动视口下 `scrollWidth = innerWidth = 360`，未发现横向溢出。浏览器自动化在导航阶段受控制状态失效影响，未完成整条旅程。
+- **真机实测：** 本轮未执行。手机完整的「首页 → Releases → 返回 → 安装指南 → FAQ → 反馈」旅程、指尖操作体验与 200% 缩放仍待验证；浏览器视口模拟不等同于真机验收。
+
+日常查询可使用已登录的 Wrangler（无需重复打开控制台）：
+
+```bash
+wrangler pages project list
+wrangler pages deployment list --project-name dsh-mobile-site
+```
+
+首次 GitHub 连接、自定义域名与路径过滤通过控制台配置；日常发布由 Git 推送触发。
+不要用 `wrangler pages deploy` 替代正常流程，否则会绕过 Pages 的 Git 构建检查。
 
 ## 首次上线顺序
 
