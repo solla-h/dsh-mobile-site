@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://fatwhale.app/en/">
+  <title>DSH Mobile — Keep up with DSH, away from your desk</title>
+  <meta name="description" content="DSH Mobile is a third-party, open-source Android client for DeepSeek Harness (DSH): check progress, answer approvals and questions, and keep the conversation going. Connects to your own DSH host. Public Android alpha.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f2ed" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#252522" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="DSH Mobile">
+  <meta property="og:title" content="DSH Mobile — Keep up with DSH, away from your desk">
+  <meta property="og:description" content="A third-party, open-source Android client for DSH: check progress, answer approvals, keep talking. Public Android alpha.">
+  <meta property="og:url" content="https://fatwhale.app/en/">
+  <link rel="alternate" hreflang="zh-CN" href="https://fatwhale.app/">
+  <link rel="alternate" hreflang="en" href="https://fatwhale.app/en/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f4f2ed'/%3E%3Crect x='10' y='5.5' width='12' height='21' rx='3.5' fill='none' stroke='%231c1c1a' stroke-width='2'/%3E%3Ccircle cx='16' cy='22' r='1.8' fill='%233f7a52'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="masthead">
+    <div class="wrap masthead__inner">
+      <a class="brand" href="./"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#scenes">What it does</a>
+        <a href="#start">Get started</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app">GitHub</a>
+      </nav>
+      <a class="lang" href="../" hreflang="zh-CN" lang="zh-CN">中文</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero__grid">
+        <div class="hero__text">
+          <p class="eyebrow">A third-party phone client for DeepSeek Harness</p>
+          <h1 id="hero-title" class="display"><span class="nb">Keep up with DSH,</span><br><span class="nb">away from your desk.</span></h1>
+          <p class="lede">
+            Your agent keeps running on your own host. DSH Mobile puts what&rsquo;s running, what&rsquo;s
+            waiting on you, and your next message on your Android phone.
+          </p>
+          <div class="actions">
+            <a class="btn btn--primary" href="https://github.com/solla-h/dsh-mobile-app/releases">
+              <svg class="btn__glyph" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v7.5M4.75 6.75 8 10l3.25-3.25M3 13.25h10"/></svg>
+              Get the Android APK
+            </a>
+            <a class="link-quiet" href="#start">Install &amp; pair <span aria-hidden="true">→</span></a>
+          </div>
+          <ul class="terms" aria-label="Before you start">
+            <li>Requires your own DSH host with the mobile gateway plugin</li>
+            <li>Public Android alpha, sideloaded from GitHub Releases</li>
+            <li>Open source; not affiliated with DeepSeek</li>
+          </ul>
+        </div>
+
+        <figure class="hero__figure">
+          <div class="stage">
+            <div class="phone" aria-hidden="true" lang="zh-CN">
+              <div class="phone__screen">
+                <div class="ui-status"></div>
+                <div class="ui-top">
+                  <span class="ui-gw"><i class="dot dot--live"></i>家里的工作站<span class="caret">⌄</span></span>
+                  <span class="ui-ws">~/projects</span>
+                </div>
+                <p class="ui-h">聚焦</p>
+                <div class="ui-grid">
+                  <div class="ui-card ui-card--attn">
+                    <span class="ui-tag ui-tag--amber">待审批</span>
+                    <b>迁移订单表</b>
+                    <span class="ui-path">~/shop-api</span>
+                    <span class="ui-snip">准备执行数据库迁移，等你确认。</span>
+                  </div>
+                  <div class="ui-card ui-card--attn">
+                    <span class="ui-tag ui-tag--amber">提问</span>
+                    <b>周报图表</b>
+                    <span class="ui-path">~/reports</span>
+                    <span class="ui-snip">按周还是按月汇总？</span>
+                  </div>
+                  <div class="ui-card">
+                    <span class="ui-tag ui-tag--live"><i class="dot dot--live"></i>运行中</span>
+                    <b>修复 CI 缓存</b>
+                    <span class="ui-path">~/site</span>
+                    <span class="ui-snip">正在重跑测试…</span>
+                  </div>
+                  <div class="ui-card">
+                    <span class="ui-tag">最近</span>
+                    <b>读书笔记整理</b>
+                    <span class="ui-path">~/notes</span>
+                    <span class="ui-snip">已按章节归档。</span>
+                  </div>
+                </div>
+                <div class="ui-orb-wrap">
+                  <span class="ui-orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
+                  <span class="ui-orb-label">按住说话，开始新会话</span>
+                </div>
+                <div class="ui-tabs">
+                  <span class="is-on">聚焦</span><span>全部会话</span><span>定时任务</span><span>插件</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption class="plate"><b>Illustration</b><span>The Focus tab, not a device screenshot. Gateway, folders and sessions are made up. The app&rsquo;s interface is currently in Simplified Chinese.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Scenes -->
+    <section class="section" id="scenes" aria-labelledby="scenes-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">What it does</p>
+          <div>
+            <h2 id="scenes-title" class="display">Three things, done from your phone.</h2>
+            <p class="intro">It isn&rsquo;t a shrunken desktop page. Away from the computer, you usually want to know where things stand, make a call, or add one more thought.</p>
+          </div>
+        </div>
+
+        <ol class="scenes">
+          <li class="scene">
+            <p class="scene__no"><span class="mono">01</span><span>At a glance</span></p>
+            <div class="scene__text">
+              <h3>What&rsquo;s running, and what&rsquo;s waiting on you.</h3>
+              <p>
+                The Focus tab puts sessions that need you first: pending approvals and questions, then running work,
+                then recent conversations. Running more than one host? Switch gateways from the top bar.
+              </p>
+            </div>
+            <figure class="scene__fig">
+              <div class="tray">
+                <div class="frag" aria-hidden="true" lang="zh-CN">
+                  <div class="frag-card menu">
+                    <div class="menu__row is-on"><i class="dot dot--live"></i><b>家里的工作站</b><small>在线</small></div>
+                    <div class="menu__row"><i class="dot dot--idle"></i><span>实验室服务器</span><small>未连接</small></div>
+                    <div class="menu__row menu__row--add"><span>＋ 添加网关</span></div>
+                  </div>
+                  <div class="queue">
+                    <div class="queue__row"><span class="ui-tag ui-tag--amber">待审批</span><span>迁移订单表</span></div>
+                    <div class="queue__row"><span class="ui-tag ui-tag--live">运行中</span><span>修复 CI 缓存</span></div>
+                  </div>
+                </div>
+              </div>
+              <figcaption><b>Illustration</b>Gateway switcher and Focus ordering</figcaption>
+            </figure>
+          </li>
+
+          <li class="scene">
+            <p class="scene__no"><span class="mono">02</span><span>Make the call</span></p>
+            <div class="scene__text">
+              <h3>Approvals and questions, answered in place.</h3>
+              <p>
+                Approval cards show the actual command, target files and a diff when one is available &mdash; not
+                just a summary. High-risk actions need a half-second hold, and you get a few seconds to undo after
+                deciding. Agent questions take a choice or a typed answer.
+              </p>
+              <p class="note">The app never approves anything on your behalf. Approval decisions must be sent online.</p>
+            </div>
+            <figure class="scene__fig">
+              <div class="tray">
+                <div class="frag" aria-hidden="true" lang="zh-CN">
+                  <div class="frag-card">
+                    <div class="appr__head"><b>请求执行命令</b><span class="risk">高风险</span></div>
+                    <pre class="cmd">npm run db:migrate -- --env staging</pre>
+                    <p class="appr__why">原因：为订单表添加新的索引</p>
+                    <div class="appr__acts">
+                      <span class="ui-btn">拒绝</span>
+                      <span class="ui-btn ui-btn--hold"><i class="fill"></i><span class="label">按住允许</span></span>
+                    </div>
+                  </div>
+                  <p class="annot" lang="en">Hold about half a second to allow</p>
+                </div>
+              </div>
+              <figcaption><b>Illustration</b>A high-risk approval card</figcaption>
+            </figure>
+          </li>
+
+          <li class="scene">
+            <p class="scene__no"><span class="mono">03</span><span>Say one thing</span></p>
+            <div class="scene__text">
+              <h3>Keep talking &mdash; type, or hold to speak.</h3>
+              <p>
+                Replies stream in, with thinking and tool calls folded into one group until you open it. While the
+                agent is mid-turn, queue a message for after the turn, or steer so it sees your note on the next
+                step. Attach images and files, or stop the current turn.
+              </p>
+              <p class="note">Hold-to-talk needs a matching voice plugin on the host with its recognition model ready. Speech is transcribed on the host, not on the phone.</p>
+            </div>
+            <figure class="scene__fig">
+              <div class="tray">
+                <div class="frag convo" aria-hidden="true" lang="zh-CN">
+                  <div class="bubble">迁移先在 staging 跑，跑完告诉我耗时。</div>
+                  <span class="trace">思考与 3 次工具调用 <span>›</span></span>
+                  <p class="reply">已在 staging 完成迁移，用时约 40 秒。新索引已生效，<code>orders</code> 表查询计划已更新。</p>
+                  <div class="composer">
+                    <div class="queued"><span class="ui-tag">排队中</span>顺便把回滚脚本也写好</div>
+                    <div class="composer__row">
+                      <span class="seg"><span class="is-on">排队</span><span>插话</span></span>
+                      <span class="composer__input">输入消息…</span>
+                      <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption><b>Illustration</b>Conversation and composer, with a queued message</figcaption>
+            </figure>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Details & conditions -->
+    <section class="section" id="details" aria-labelledby="details-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Details &amp; conditions</p>
+          <div>
+            <h2 id="details-title" class="display">What it can do, and what it needs.</h2>
+            <p class="intro">Every capability has limits. We put the conditions right beside it, not in a footnote.</p>
+          </div>
+        </div>
+
+        <div class="ledger__labels" aria-hidden="true"><span></span><span>It can</span><span>Conditions &amp; limits</span></div>
+        <ul class="ledger">
+          <li>
+            <h3>Leave and come back to your lists and drafts</h3>
+            <p><span class="tag">Needs:</span>Session lists, drafts and attachment details are cached on the phone. Text written offline goes to an outbox and is sent in order after reconnecting; file uploads and approval decisions require a connection.</p>
+          </li>
+          <li>
+            <h3>Switch between several gateways</h3>
+            <p><span class="tag">Needs:</span>Each gateway is paired separately and keeps its own sessions, drafts and outbox. The phone must be able to reach that gateway&rsquo;s endpoint.</p>
+          </li>
+          <li>
+            <h3>Find a gateway again after its address changes</h3>
+            <p><span class="tag">Needs:</span>An optional encrypted address book, which requires a gateway that supports it and your own Cloudflare account; recovery usually takes one to three minutes. It encrypts the endpoint address only &mdash; it does not make conversations end-to-end encrypted, and you don&rsquo;t need it to use the app.</p>
+          </li>
+          <li>
+            <h3>Reconnect when you come back to the app</h3>
+            <p><span class="tag">Needs:</span>Android suspends the app in the background; it checks and reconnects when brought to the foreground. This version has no system push notifications and does not promise to stay connected in the background.</p>
+          </li>
+          <li>
+            <h3>Manage the host&rsquo;s plugins from your phone</h3>
+            <p><span class="tag">Needs:</span>These are plugins of the DSH profile behind the gateway. Disabling or removing the mobile gateway itself cuts the connection immediately; it can only be restored on the host.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Getting started -->
+    <section class="section" id="start" aria-labelledby="start-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Get started</p>
+          <div>
+            <h2 id="start-title" class="display">Three steps to your host.</h2>
+            <p class="intro">This is the route, not the manual. Exact commands and pinned versions live in the app repository&rsquo;s docs and change with each release.</p>
+          </div>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <h3>Have a DSH host ready</h3>
+            <p>A computer or server that keeps DSH Web running. DSH Mobile ships no model and hosts no service; the agent always runs on that machine.</p>
+            <div class="links">
+              <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">Check compatibility</a>
+            </div>
+          </li>
+          <li class="step">
+            <h3>Install the gateway, create a pairing code</h3>
+            <p>
+              Install <code>dsh-plugin-mobile-gateway</code> in the matching profile, at the version pinned for this
+              app. Pairing codes are single-use and expire after about five minutes &mdash; treat them like a
+              password. You can also hand the agent setup guide to your DSH and let it do the install.
+            </p>
+            <div class="links">
+              <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.md">User guide</a>
+              <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/AGENT-SETUP.md">Agent setup guide</a>
+            </div>
+          </li>
+          <li class="step">
+            <h3>Install the APK and scan</h3>
+            <p>Download the APK from GitHub Releases and allow the install; checksum files sit on the same page. Open the app and scan the pairing code, or paste it. Upgrade by installing over the top &mdash; don&rsquo;t uninstall first.</p>
+            <div class="links">
+              <a href="https://github.com/solla-h/dsh-mobile-app/releases">Open GitHub Releases</a>
+            </div>
+          </li>
+        </ol>
+
+        <div class="preflight">
+          <b>Reachability</b>
+          <p>Your phone must be able to reach the gateway: directly on the same Wi-Fi, or through Cloudflare Tunnel, Tailscale or similar. Public endpoints must use <code>wss://</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">FAQ</p>
+          <div>
+            <h2 id="faq-title" class="display">Before you start.</h2>
+          </div>
+        </div>
+
+        <div class="faq-layout">
+          <div class="spacer"></div>
+          <div class="faq">
+            <details>
+              <summary>Is this an official DeepSeek app?</summary>
+              <div class="answer"><p>No. DSH Mobile is an independent, third-party open-source project, not affiliated with DeepSeek or Expo.</p></div>
+            </details>
+            <details>
+              <summary>What do I need?</summary>
+              <div class="answer">
+                <p>A host running DSH Web, the mobile gateway plugin installed in that profile, an Android phone, and a network path from the phone to the gateway.</p>
+                <p>DSH and gateway versions must match the combination pinned for the app; see <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/compatibility.json">compatibility.json</a>.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Does the model run on my phone?</summary>
+              <div class="answer"><p>No. The agent runs on your host; the phone is only a client. It isn&rsquo;t a hosted AI service either.</p></div>
+            </details>
+            <details>
+              <summary>Is the app available in English?</summary>
+              <div class="answer"><p>Not yet. The interface is currently in Simplified Chinese, and localization is deferred. The <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.md">English user guide</a> walks through every screen.</p></div>
+            </details>
+            <details>
+              <summary>What does voice input need?</summary>
+              <div class="answer"><p>A voice plugin on the host that matches your DSH version, with its recognition model ready. Until then the app clearly shows that voice is unavailable instead of failing silently.</p></div>
+            </details>
+            <details>
+              <summary>What happens when the connection drops?</summary>
+              <div class="answer">
+                <p>The app reconnects on its own; tap the connection banner to retry right away. Text written offline goes to an outbox and is sent in order after reconnecting.</p>
+                <p>A message in flight at the moment of disconnect may be marked unconfirmed. The app won&rsquo;t resend it silently &mdash; retry it yourself. If the device is revoked or its credential expires, pair again.</p>
+              </div>
+            </details>
+            <details>
+              <summary>Is there an iOS version, or an app-store listing?</summary>
+              <div class="answer"><p>Neither, for now. iOS is deferred and unverified. The Android app is sideloaded from GitHub Releases and hasn&rsquo;t been verified on every device.</p></div>
+            </details>
+            <details>
+              <summary>Is the current version stable?</summary>
+              <div class="answer"><p>Not yet &mdash; it&rsquo;s a public alpha, and the protocol and interface are still evolving. For the current download, checksums and what has been verified, see <a href="https://github.com/solla-h/dsh-mobile-app/releases">Releases</a> and the <a href="https://github.com/solla-h/dsh-mobile-app">app repository</a>.</p></div>
+            </details>
+            <details>
+              <summary>Where is my data kept?</summary>
+              <div class="answer">
+                <p>Pairing credentials are kept in the phone&rsquo;s secure storage; session history, drafts and attachment details are cached on the phone. The app includes no third-party analytics SDK, but your host, gateway and any tunnel service may keep their own logs.</p>
+                <p>If you lose your phone, revoke it from the gateway panel. Removing the gateway on another phone does not revoke the lost one.</p>
+              </div>
+            </details>
+            <details>
+              <summary>How is it licensed?</summary>
+              <div class="answer"><p>The app&rsquo;s original code is MIT. Its pet animation assets are CC BY-NC-SA 4.0, non-commercial only; see <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/LICENSE">LICENSE</a> and <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/NOTICE">NOTICE</a>. This website is MIT and does not use those assets.</p></div>
+            </details>
+            <details>
+              <summary>Where do I report a problem?</summary>
+              <div class="answer"><p>On <a href="https://github.com/solla-h/dsh-mobile-app/issues">GitHub Issues</a>, with your app, gateway and DSH versions and the steps to reproduce. Never post pairing QR codes, device credentials or unredacted conversation screenshots.</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="wrap">
+        <h2 id="closing-title" class="display">The agent stays at the desk.<br>You don&rsquo;t have to.</h2>
+        <p>Public Android alpha. Free and open source, sideloaded from GitHub Releases.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="https://github.com/solla-h/dsh-mobile-app/releases">
+            <svg class="btn__glyph" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v7.5M4.75 6.75 8 10l3.25-3.25M3 13.25h10"/></svg>
+            Get the Android APK
+          </a>
+        </div>
+        <div class="more">
+          <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.md">Read the user guide</a>
+          <a href="https://github.com/solla-h/dsh-mobile-app/issues">Report an issue</a>
+          <a href="https://github.com/solla-h/dsh-mobile-app">View the source</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <p class="brand"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile</p>
+        <p>Public Android alpha. An independent open-source project, not affiliated with DeepSeek or Expo.</p>
+        <p>App code MIT; pet assets CC BY-NC-SA 4.0, non-commercial only, not used on this site. Site content MIT.</p>
+      </div>
+      <nav aria-label="Footer">
+        <a href="https://github.com/solla-h/dsh-mobile-app">App source</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app/releases">Releases</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app/issues">Issues</a>
+        <a href="https://github.com/solla-h/dsh-mobile-site">Site source</a>
+        <a href="../" hreflang="zh-CN" lang="zh-CN">简体中文</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

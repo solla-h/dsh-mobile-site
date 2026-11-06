@@ -3,10 +3,9 @@
 DSH Mobile（第三方开源 Android 客户端）的独立静态宣传站仓库。
 生产分支 `main`，唯一可部署目录是 `site/`。
 
-> **当前状态：开发骨架，尚未上线。**
-> 目前只有一个中性占位页；拟使用 `fatwhale.app`，尚未创建 Cloudflare Pages 项目或绑定网站域名。
-> 页面设计与正式文案由后续 Claude 完成，先读
-> [docs/BRIEF.md](docs/BRIEF.md)。
+> **当前状态：上线准备就绪，尚未发布。**
+> 已完成简体中文首页（`/`）与英文页（`/en/`），并准备 `fatwhale.app` 的生产元数据。
+> 采用 Cloudflare Pages Git 集成，发布前复用静态检查；项目、域名及验证状态见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 
 ## 本地预览
 
@@ -14,7 +13,7 @@ DSH Mobile（第三方开源 Android 客户端）的独立静态宣传站仓库�
 python -m http.server --bind 127.0.0.1 --directory site 4173
 ```
 
-打开 <http://127.0.0.1:4173/>。不要另写开发服务器，也不要提交预览产物。
+打开 <http://127.0.0.1:4173/>（中文）或 <http://127.0.0.1:4173/en/>（英文）。不要另写开发服务器，也不要提交预览产物。
 
 ## 检查
 
@@ -25,12 +24,13 @@ python -I scripts/check_site.py    # Windows 没有 python3 命令时
 
 脚本只使用 Python 标准库：检查 `site/` 下每个 HTML 的 `lang`、`<title>` 和
 viewport，并验证 HTML/CSS 引用的本地资源与链接确实存在。
-CI 在 push 到 `main` 和 pull request 时运行同一条命令。
+CI 在 push 到 `main`、pull request 和手动触发时运行同一条命令。
+Pages 也执行该检查作为发布门槛，通过后只发布 `site/`。
 
 ## 目录
 
 ```text
-site/                  # 唯一部署输出；index.html + styles.css
+site/                  # 唯一部署输出；index.html（中文）、en/index.html（英文）、styles.css
 scripts/check_site.py  # 本地与 CI 共用的静态检查
 docs/BRIEF.md          # 内容槽位、布局、事实边界与验收
 docs/DEPLOYMENT.md     # Cloudflare Pages Git 集成、更新与回滚

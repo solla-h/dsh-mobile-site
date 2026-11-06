@@ -1,7 +1,7 @@
 # 部署：Cloudflare Pages Git 集成
 
-> 核对日期 2026-11-06。参数依据 Cloudflare 官方文档；**本轮没有登录 Cloudflare、
-> 创建 Pages 项目或修改 DNS**。执行任何账号/DNS 操作前必须得到用户明确授权。
+> 上线准备：已核验 Wrangler 认证及 Cloudflare GitHub 集成对本仓库的访问权限。
+> Pages 项目与正式域名状态以本文「发布记录」为准。
 
 ## 仓库与产物
 
@@ -24,15 +24,22 @@
 | Production branch | `main` |
 | Root directory | 留空（仓库根目录） |
 | Framework preset | None |
-| Build command | `exit 0`（无框架时留空也可，官方文档允许空命令） |
+| Build command | `python3 -I scripts/check_site.py`（只检查，不生成产物；非零退出阻止发布） |
 | Build output directory | `site` |
-| Build watch paths | Include `site/*`；Exclude 留空 |
+| Build watch paths | Include `site/*`、`scripts/check_site.py`；Exclude 留空 |
 | Preview deployments | 非 `main` 分支自动生成预览（默认公开、带 `X-Robots-Tag: noindex`） |
 
-首次启用自动发布前，建议在 GitHub 为 `main` 配置必需的 CI 检查；Pages 部署本身
-不保证等待本仓库的 site CI 通过。
+GitHub Actions 的 `site-ci / check` 在 PR、push 到 `main` 和手动触发时执行检查。
+Pages 不等待 GitHub CI，因此在自己的 Build command 中重跑同一脚本：检查失败时
+该次部署失败，不替换当前生产站。`main` 当前未设置分支保护；不要把 CI 当成合并限制。
 
-## 首次上线顺序（待授权后执行）
+## 发布记录
+
+- 本地中文和英文页面检查通过，已准备 `fatwhale.app` 的 canonical 与语言链接。
+- Cloudflare GitHub 集成可以访问 `solla-h/dsh-mobile-site`；待提交页面后创建 Pages 项目。
+- 正式域名尚未绑定；需授权后核查现有 DNS、Worker 路由与重定向，再绑定并验证。
+
+## 首次上线顺序
 
 1. 合并页面到 `main`，确认仓库中确实有 `site/index.html`。
 2. 创建 Git 集成的 Pages 项目，按上表配置，先检查 `pages.dev` 的部署结果。
@@ -48,7 +55,7 @@
 
 修改 `site/` → 提 PR → 使用 Pages 给出的预览链接检查 → CI 通过并合并到 `main` →
 Pages 自动更新正式站。小改动也走同一路径，便于定位线上内容对应的提交。
-只改文档或工具时，`site/*` 的 watch paths 会跳过网站构建。
+只改文档或 GitHub workflow 时跳过 Pages 构建；修改 `scripts/check_site.py` 会触发重新检查。
 预览地址默认公开，`noindex` 只是防索引，不是访问控制；预览中不要放秘密。
 
 ## 回滚

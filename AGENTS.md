@@ -5,10 +5,9 @@
 
 ## 当前阶段
 
-- 只有开发占位页，**尚未上线**；拟用域名是 `fatwhale.app`，尚未创建 Pages 项目或绑定网站域名。
-- 后续 Claude 负责视觉与正式文案；动工前先读 [docs/BRIEF.md](docs/BRIEF.md)，
-  部署问题读 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
-- 首版只做简体中文；App 的 i18n 和 iOS 版本都暂缓，不要宣称 iOS 可用。
+- 中文与英文页面已完成，正在接通 CI/CD 与首次发布；实时部署状态见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
+- 修改内容前读 [docs/BRIEF.md](docs/BRIEF.md)，部署问题读 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
+- 网站提供简体中文和英文；App 的 i18n 和 iOS 版本都暂缓，不要宣称 iOS 可用。
 
 ## 事实来源（只读）
 
@@ -20,7 +19,8 @@
 - 版本锁定：[compatibility.json](https://github.com/solla-h/dsh-mobile-app/blob/master/compatibility.json)、
   [docs/COMPATIBILITY.md](https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md)
 - 安装：[docs/AGENT-SETUP.md](https://github.com/solla-h/dsh-mobile-app/blob/master/docs/AGENT-SETUP.md)、
-  [docs/USER-GUIDE.zh-CN.md](https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.zh-CN.md)
+  [docs/USER-GUIDE.zh-CN.md](https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.zh-CN.md)、
+  [docs/USER-GUIDE.md](https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.md)
 - 许可：[LICENSE](https://github.com/solla-h/dsh-mobile-app/blob/master/LICENSE)、
   [NOTICE](https://github.com/solla-h/dsh-mobile-app/blob/master/NOTICE)
 
