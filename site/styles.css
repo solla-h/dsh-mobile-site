@@ -1,9 +1,9 @@
 /*
- * DSH Mobile — 宣传站样式
+ * DSH Mobile App — 宣传站样式
  *
  * 色板沿用 App 的「漫反射电纸书」：日间暖石纸色、夜间暖炭电纸灰。
  * 不用纯黑纯白、不用渐变与发光；层次只靠纸色深浅和发丝线。
- * 纯 CSS，无外部字体与脚本。
+ * 纯 CSS，无外部字体。
  */
 
 /* ---------- Tokens ---------- */
@@ -241,6 +241,10 @@ p {
 
 .nav a,
 .lang {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
   color: var(--ink-2);
   text-decoration: none;
   white-space: nowrap;
@@ -252,6 +256,7 @@ p {
 }
 
 .lang {
+  min-width: 44px;
   padding: 0.18rem 0.6rem;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -259,7 +264,7 @@ p {
   letter-spacing: 0.04em;
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 48rem) {
   .masthead__inner {
     flex-wrap: wrap;
     padding-block: 0.85rem 0.7rem;
@@ -268,7 +273,7 @@ p {
   .nav {
     order: 3;
     width: 100%;
-    gap: 1.35rem;
+    gap: clamp(0.5rem, 3vw, 1.35rem);
     font-size: 0.9rem;
   }
 }
@@ -393,12 +398,6 @@ p {
   font-size: clamp(2.3rem, 4.6vw, 3.7rem);
 }
 
-@media (min-width: 60.01rem) {
-  .hero h1 .nb {
-    white-space: nowrap;
-  }
-}
-
 .hero .lede {
   max-width: 34em;
   margin-top: 1.6rem;
@@ -502,7 +501,7 @@ p {
 .phone__screen {
   display: flex;
   flex-direction: column;
-  aspect-ratio: 9 / 19;
+  min-height: 38rem;
   overflow: hidden;
   border-radius: 2.1rem;
   background: var(--paper);
@@ -791,6 +790,7 @@ p {
 
 .tray {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   min-height: 19rem;
   padding: clamp(1.5rem, 4vw, 2.75rem);
@@ -1038,6 +1038,7 @@ p {
 /* conversation */
 .convo {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.7em;
 }
 

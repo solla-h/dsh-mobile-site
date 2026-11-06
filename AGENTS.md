@@ -1,6 +1,6 @@
 # AGENTS.md
 
-本仓库是 DSH Mobile 的独立静态宣传站：GitHub 仓库 `solla-h/dsh-mobile-site`，
+本仓库是 DSH Mobile App 的独立静态宣传站：GitHub 仓库 `solla-h/dsh-mobile-site`，
 生产分支 `main`，唯一部署目录 `site/`。App 源码在另一个仓库，只在事实层面引用。
 
 ## 当前阶段
@@ -8,6 +8,8 @@
 - 中文与英文页面已上线：<https://fatwhale.app/>、<https://fatwhale.app/en/>；CI/CD、验证与回滚见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 - 修改内容前读 [docs/BRIEF.md](docs/BRIEF.md)，部署问题读 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 - 网站提供简体中文和英文；App 的 i18n 和 iOS 版本都暂缓，不要宣称 iOS 可用。
+- 产品对外名称固定为 **DSH Mobile App**；不要使用另一个项目的名称 DSH Mobile。英文示意须完整英文化，并注明实际 App 界面仍为简体中文。
+- 搜索优化与站长统计方案见 [docs/DISCOVERY.md](docs/DISCOVERY.md)。不虚构评价、下载量或搜索排名收益。
 
 ## 事实来源（只读）
 

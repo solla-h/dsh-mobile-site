@@ -1,6 +1,6 @@
-# DSH Mobile 宣传站
+# DSH Mobile App 宣传站
 
-DSH Mobile（第三方开源 Android 客户端）的独立静态宣传站仓库。
+DSH Mobile App（第三方开源 Android 客户端）的独立静态宣传站仓库。
 生产分支 `main`，唯一可部署目录是 `site/`。
 
 > **已上线：<https://fatwhale.app/>（中文）· <https://fatwhale.app/en/>（英文）。**
@@ -22,10 +22,12 @@ python3 -I scripts/check_site.py   # Linux / macOS / CI
 python -I scripts/check_site.py    # Windows 没有 python3 命令时
 ```
 
-脚本只使用 Python 标准库：检查 `site/` 下每个 HTML 的 `lang`、`<title>` 和
-viewport，并验证 HTML/CSS 引用的本地资源与链接确实存在。
-CI 在 push 到 `main`、pull request 和手动触发时运行同一条命令。
-Pages 也执行该检查作为发布门槛，通过后只发布 `site/`。
+脚本只使用 Python 标准库：检查文档基础、本地资源、品牌名称、英文残留、
+canonical/hreflang、站点名称 JSON-LD、robots 和 sitemap。检查器回归测试使用
+`python3 -I scripts/test_check_site.py`（Windows 用 `python -I`）。
+CI 在 push 到 `main`、pull request 和手动触发时执行回归测试与静态检查。
+Pages 执行静态检查作为发布门槛，通过后只发布 `site/`。
+搜索优化、统计指标与隐私边界见 [docs/DISCOVERY.md](docs/DISCOVERY.md)。
 
 ## 目录
 

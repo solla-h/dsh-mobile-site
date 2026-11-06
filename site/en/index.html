@@ -4,20 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://fatwhale.app/en/">
-  <title>DSH Mobile — Keep up with DSH, away from your desk</title>
-  <meta name="description" content="DSH Mobile is a third-party, open-source Android client for DeepSeek Harness (DSH): check progress, answer approvals and questions, and keep the conversation going. Connects to your own DSH host. Public Android alpha.">
+  <title>DSH Mobile App — Android Client for DeepSeek Harness</title>
+  <meta name="description" content="DSH Mobile App is a third-party, open-source Android client for DeepSeek Harness: check progress, handle approvals and continue conversations. Requires your own host and mobile gateway. Public alpha, sideloaded from GitHub Releases.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f4f2ed" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#252522" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
-  <meta property="og:site_name" content="DSH Mobile">
-  <meta property="og:title" content="DSH Mobile — Keep up with DSH, away from your desk">
-  <meta property="og:description" content="A third-party, open-source Android client for DSH: check progress, answer approvals, keep talking. Public Android alpha.">
+  <meta property="og:site_name" content="DSH Mobile App">
+  <meta property="og:title" content="DSH Mobile App — Android Client for DeepSeek Harness">
+  <meta property="og:description" content="A third-party, open-source Android client for DeepSeek Harness. Check progress, handle approvals and keep talking. Requires your own host and mobile gateway. Public alpha.">
   <meta property="og:url" content="https://fatwhale.app/en/">
   <link rel="alternate" hreflang="zh-CN" href="https://fatwhale.app/">
   <link rel="alternate" hreflang="en" href="https://fatwhale.app/en/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f4f2ed'/%3E%3Crect x='10' y='5.5' width='12' height='21' rx='3.5' fill='none' stroke='%231c1c1a' stroke-width='2'/%3E%3Ccircle cx='16' cy='22' r='1.8' fill='%233f7a52'/%3E%3C/svg%3E">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://fatwhale.app/#website",
+      "name": "DSH Mobile App",
+      "url": "https://fatwhale.app/",
+      "inLanguage": ["zh-CN", "en"]
+    }
+  </script>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -25,7 +35,7 @@
 
   <header class="masthead">
     <div class="wrap masthead__inner">
-      <a class="brand" href="./"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile</a>
+      <a class="brand" href="./"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile App</a>
       <nav class="nav" aria-label="Primary">
         <a href="#scenes">What it does</a>
         <a href="#start">Get started</a>
@@ -44,8 +54,9 @@
           <p class="eyebrow">A third-party phone client for DeepSeek Harness</p>
           <h1 id="hero-title" class="display"><span class="nb">Keep up with DSH,</span><br><span class="nb">away from your desk.</span></h1>
           <p class="lede">
-            Your agent keeps running on your own host. DSH Mobile puts what&rsquo;s running, what&rsquo;s
-            waiting on you, and your next message on your Android phone.
+            DSH Mobile App is a third-party, open-source Android client for DeepSeek Harness (DSH).
+            Your agent runs on your own host; use your phone to check progress, handle approvals
+            and questions, and continue the conversation away from your computer.
           </p>
           <div class="actions">
             <a class="btn btn--primary" href="https://github.com/solla-h/dsh-mobile-app/releases">
@@ -63,51 +74,51 @@
 
         <figure class="hero__figure">
           <div class="stage">
-            <div class="phone" aria-hidden="true" lang="zh-CN">
+            <div class="phone" aria-hidden="true">
               <div class="phone__screen">
                 <div class="ui-status"></div>
                 <div class="ui-top">
-                  <span class="ui-gw"><i class="dot dot--live"></i>家里的工作站<span class="caret">⌄</span></span>
+                  <span class="ui-gw"><i class="dot dot--live"></i>Home workstation<span class="caret">⌄</span></span>
                   <span class="ui-ws">~/projects</span>
                 </div>
-                <p class="ui-h">聚焦</p>
+                <p class="ui-h">Focus</p>
                 <div class="ui-grid">
                   <div class="ui-card ui-card--attn">
-                    <span class="ui-tag ui-tag--amber">待审批</span>
-                    <b>迁移订单表</b>
+                    <span class="ui-tag ui-tag--amber">Approval</span>
+                    <b>Migrate orders</b>
                     <span class="ui-path">~/shop-api</span>
-                    <span class="ui-snip">准备执行数据库迁移，等你确认。</span>
+                    <span class="ui-snip">Ready to migrate. Awaiting approval.</span>
                   </div>
                   <div class="ui-card ui-card--attn">
-                    <span class="ui-tag ui-tag--amber">提问</span>
-                    <b>周报图表</b>
+                    <span class="ui-tag ui-tag--amber">Question</span>
+                    <b>Weekly charts</b>
                     <span class="ui-path">~/reports</span>
-                    <span class="ui-snip">按周还是按月汇总？</span>
+                    <span class="ui-snip">Group by week or month?</span>
                   </div>
                   <div class="ui-card">
-                    <span class="ui-tag ui-tag--live"><i class="dot dot--live"></i>运行中</span>
-                    <b>修复 CI 缓存</b>
+                    <span class="ui-tag ui-tag--live"><i class="dot dot--live"></i>Running</span>
+                    <b>Fix CI cache</b>
                     <span class="ui-path">~/site</span>
-                    <span class="ui-snip">正在重跑测试…</span>
+                    <span class="ui-snip">Rerunning tests…</span>
                   </div>
                   <div class="ui-card">
-                    <span class="ui-tag">最近</span>
-                    <b>读书笔记整理</b>
+                    <span class="ui-tag">Recent</span>
+                    <b>Reading notes</b>
                     <span class="ui-path">~/notes</span>
-                    <span class="ui-snip">已按章节归档。</span>
+                    <span class="ui-snip">Filed by chapter.</span>
                   </div>
                 </div>
                 <div class="ui-orb-wrap">
                   <span class="ui-orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
-                  <span class="ui-orb-label">按住说话，开始新会话</span>
+                  <span class="ui-orb-label">Hold to talk to start a session</span>
                 </div>
                 <div class="ui-tabs">
-                  <span class="is-on">聚焦</span><span>全部会话</span><span>定时任务</span><span>插件</span>
+                  <span class="is-on">Focus</span><span>Sessions</span><span>Schedules</span><span>Plugins</span>
                 </div>
               </div>
             </div>
           </div>
-          <figcaption class="plate"><b>Illustration</b><span>The Focus tab, not a device screenshot. Gateway, folders and sessions are made up. The app&rsquo;s interface is currently in Simplified Chinese.</span></figcaption>
+          <figcaption class="plate"><b>English illustration</b><span>Not a device screenshot. Gateway, folders and sessions are fictional. The illustrations on this page are translated; the app itself currently uses Simplified Chinese.</span></figcaption>
         </figure>
       </div>
     </section>
@@ -135,15 +146,15 @@
             </div>
             <figure class="scene__fig">
               <div class="tray">
-                <div class="frag" aria-hidden="true" lang="zh-CN">
+                <div class="frag" aria-hidden="true">
                   <div class="frag-card menu">
-                    <div class="menu__row is-on"><i class="dot dot--live"></i><b>家里的工作站</b><small>在线</small></div>
-                    <div class="menu__row"><i class="dot dot--idle"></i><span>实验室服务器</span><small>未连接</small></div>
-                    <div class="menu__row menu__row--add"><span>＋ 添加网关</span></div>
+                    <div class="menu__row is-on"><i class="dot dot--live"></i><b>Home workstation</b><small>Online</small></div>
+                    <div class="menu__row"><i class="dot dot--idle"></i><span>Lab server</span><small>Disconnected</small></div>
+                    <div class="menu__row menu__row--add"><span>＋ Add gateway</span></div>
                   </div>
                   <div class="queue">
-                    <div class="queue__row"><span class="ui-tag ui-tag--amber">待审批</span><span>迁移订单表</span></div>
-                    <div class="queue__row"><span class="ui-tag ui-tag--live">运行中</span><span>修复 CI 缓存</span></div>
+                    <div class="queue__row"><span class="ui-tag ui-tag--amber">Approval</span><span>Migrate orders</span></div>
+                    <div class="queue__row"><span class="ui-tag ui-tag--live">Running</span><span>Fix CI cache</span></div>
                   </div>
                 </div>
               </div>
@@ -164,17 +175,17 @@
             </div>
             <figure class="scene__fig">
               <div class="tray">
-                <div class="frag" aria-hidden="true" lang="zh-CN">
+                <div class="frag" aria-hidden="true">
                   <div class="frag-card">
-                    <div class="appr__head"><b>请求执行命令</b><span class="risk">高风险</span></div>
+                    <div class="appr__head"><b>Command request</b><span class="risk">High risk</span></div>
                     <pre class="cmd">npm run db:migrate -- --env staging</pre>
-                    <p class="appr__why">原因：为订单表添加新的索引</p>
+                    <p class="appr__why">Reason: Add an index to the orders table</p>
                     <div class="appr__acts">
-                      <span class="ui-btn">拒绝</span>
-                      <span class="ui-btn ui-btn--hold"><i class="fill"></i><span class="label">按住允许</span></span>
+                      <span class="ui-btn">Deny</span>
+                      <span class="ui-btn ui-btn--hold"><i class="fill"></i><span class="label">Hold to allow</span></span>
                     </div>
                   </div>
-                  <p class="annot" lang="en">Hold about half a second to allow</p>
+                  <p class="annot">Hold about half a second to allow</p>
                 </div>
               </div>
               <figcaption><b>Illustration</b>A high-risk approval card</figcaption>
@@ -194,15 +205,15 @@
             </div>
             <figure class="scene__fig">
               <div class="tray">
-                <div class="frag convo" aria-hidden="true" lang="zh-CN">
-                  <div class="bubble">迁移先在 staging 跑，跑完告诉我耗时。</div>
-                  <span class="trace">思考与 3 次工具调用 <span>›</span></span>
-                  <p class="reply">已在 staging 完成迁移，用时约 40 秒。新索引已生效，<code>orders</code> 表查询计划已更新。</p>
+                <div class="frag convo" aria-hidden="true">
+                  <div class="bubble">Run the migration on staging first and tell me how long it takes.</div>
+                  <span class="trace">Thinking and 3 tool calls <span>›</span></span>
+                  <p class="reply">Migration completed on staging in about 40 seconds. The new index is active, and the <code>orders</code> query plan is updated.</p>
                   <div class="composer">
-                    <div class="queued"><span class="ui-tag">排队中</span>顺便把回滚脚本也写好</div>
+                    <div class="queued"><span class="ui-tag">Queued</span>Also prepare a rollback script</div>
                     <div class="composer__row">
-                      <span class="seg"><span class="is-on">排队</span><span>插话</span></span>
-                      <span class="composer__input">输入消息…</span>
+                      <span class="seg"><span class="is-on">Queue</span><span>Steer</span></span>
+                      <span class="composer__input">Type a message…</span>
                       <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
                     </div>
                   </div>
@@ -266,7 +277,7 @@
         <ol class="steps">
           <li class="step">
             <h3>Have a DSH host ready</h3>
-            <p>A computer or server that keeps DSH Web running. DSH Mobile ships no model and hosts no service; the agent always runs on that machine.</p>
+            <p>A computer or server that keeps DSH Web running. DSH Mobile App ships no model and hosts no service; the agent always runs on that machine.</p>
             <div class="links">
               <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">Check compatibility</a>
             </div>
@@ -313,8 +324,12 @@
           <div class="spacer"></div>
           <div class="faq">
             <details>
+              <summary>How does DSH Mobile App work with DeepSeek Harness?</summary>
+              <div class="answer"><p>DeepSeek Harness (DSH) runs on your own computer or server. DSH Mobile App is a third-party Android companion that connects to DSH Web through the mobile gateway. You can view sessions, handle approvals and questions, and continue conversations. It is not the official DeepSeek chat app and does not host a model service.</p></div>
+            </details>
+            <details>
               <summary>Is this an official DeepSeek app?</summary>
-              <div class="answer"><p>No. DSH Mobile is an independent, third-party open-source project, not affiliated with DeepSeek or Expo.</p></div>
+              <div class="answer"><p>No. DSH Mobile App is an independent, third-party open-source project, not affiliated with DeepSeek or Expo.</p></div>
             </details>
             <details>
               <summary>What do I need?</summary>
@@ -393,9 +408,10 @@
   <footer class="footer">
     <div class="wrap footer__grid">
       <div>
-        <p class="brand"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile</p>
+        <p class="brand"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile App</p>
         <p>Public Android alpha. An independent open-source project, not affiliated with DeepSeek or Expo.</p>
         <p>App code MIT; pet assets CC BY-NC-SA 4.0, non-commercial only, not used on this site. Site content MIT.</p>
+        <p>This site uses <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a> for page traffic and performance, without cookies to identify visitors.</p>
       </div>
       <nav aria-label="Footer">
         <a href="https://github.com/solla-h/dsh-mobile-app">App source</a>
