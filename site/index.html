@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>DSH Mobile 宣传站（开发中）</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="https://github.com/solla-h/dsh-mobile-app">DSH Mobile</a>
+    <nav aria-label="主要导航">
+      <a href="https://github.com/solla-h/dsh-mobile-app">GitHub</a>
+      <a href="https://github.com/solla-h/dsh-mobile-app/releases">下载 APK</a>
+    </nav>
+  </header>
+
+  <main>
+    <p class="status" role="status">开发中骨架，尚未上线</p>
+
+    <h1>在手机上查看 DSH 进度、处理审批、继续对话。</h1>
+
+    <p class="lede">
+      DSH Mobile 是第三方、开源的 DeepSeek Harness（DSH）Android 客户端，
+      连接用户自己运行的 DSH 宿主。当前为 Android 公开 alpha，通过 GitHub Releases
+      侧载安装；iOS 暂缓。
+    </p>
+
+    <p class="actions">
+      <a class="button" href="https://github.com/solla-h/dsh-mobile-app/releases">获取 Android APK</a>
+      <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.zh-CN.md">安装与配对指南</a>
+    </p>
+
+    <section aria-labelledby="before-you-start">
+      <h2 id="before-you-start">开始前需要知道</h2>
+      <ul>
+        <li>App 不自带模型，也不托管 DSH；需要一台运行 DSH Web 的宿主，并在对应 profile 安装
+          <code>dsh-plugin-mobile-gateway</code>。</li>
+        <li>本版本锁定 DSH <code>0.2.1-rc.5</code> + 网关 <code>0.12.0-rdv.3</code>，见
+          <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/compatibility.json">compatibility.json</a>。</li>
+        <li>语音是可选能力，需要宿主安装匹配的插件并准备好识别模型。</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="links">
+      <h2 id="links">相关链接</h2>
+      <ul>
+        <li><a href="https://github.com/solla-h/dsh-mobile-app">App 源码与文档</a></li>
+        <li><a href="https://github.com/solla-h/dsh-mobile-app/releases">GitHub Releases（APK、SHA256SUMS、build-info.json）</a></li>
+        <li><a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">版本兼容表</a></li>
+        <li><a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/AGENT-SETUP.md">Agent 安装手册</a></li>
+        <li><a href="https://github.com/solla-h/dsh-mobile-app/issues">问题反馈</a></li>
+      </ul>
+    </section>
+
+    <p class="note">
+      本项目与 DeepSeek、Expo 官方无关。App 原创代码 MIT；宠物素材 CC BY-NC-SA 4.0，
+      仅限非商业使用。
+    </p>
+  </main>
+
+  <footer>
+    <p>独立宣传站。当前只是开发占位页，未对外发布；页面设计与正式文案待后续完成。</p>
+  </footer>
+</body>
+</html>

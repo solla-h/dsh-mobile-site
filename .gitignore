@@ -1,0 +1,22 @@
+# Local secrets and agent scratch files
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.scratch/
+.llmdoc-tmp/
+.claude/settings.local.json
+
+# Python bytecode from local checks
+__pycache__/
+*.py[cod]
+
+# Local deploy/preview caches
+.wrangler/
+.venv/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
