@@ -5,7 +5,7 @@
 
 ## 当前阶段
 
-- 中文与英文页面已完成，正在接通 CI/CD 与首次发布；实时部署状态见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
+- 中文与英文页面已上线：<https://fatwhale.app/>、<https://fatwhale.app/en/>；CI/CD、验证与回滚见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 - 修改内容前读 [docs/BRIEF.md](docs/BRIEF.md)，部署问题读 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 - 网站提供简体中文和英文；App 的 i18n 和 iOS 版本都暂缓，不要宣称 iOS 可用。
 

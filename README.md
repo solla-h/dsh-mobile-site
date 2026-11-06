@@ -3,9 +3,9 @@
 DSH Mobile（第三方开源 Android 客户端）的独立静态宣传站仓库。
 生产分支 `main`，唯一可部署目录是 `site/`。
 
-> **当前状态：上线准备就绪，尚未发布。**
-> 已完成简体中文首页（`/`）与英文页（`/en/`），并准备 `fatwhale.app` 的生产元数据。
-> 采用 Cloudflare Pages Git 集成，发布前复用静态检查；项目、域名及验证状态见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
+> **已上线：<https://fatwhale.app/>（中文）· <https://fatwhale.app/en/>（英文）。**
+> Cloudflare Pages Git 集成从 `main` 自动部署，检查通过后只发布 `site/`。
+> 项目配置、验证边界与回滚操作见 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)。
 
 ## 本地预览
 
