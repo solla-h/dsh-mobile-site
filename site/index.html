@@ -3,65 +3,396 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
-  <title>DSH Mobile 宣传站（开发中）</title>
+  <link rel="canonical" href="https://fatwhale.app/">
+  <title>DSH Mobile — 不在桌前，也跟得上你的 DSH</title>
+  <meta name="description" content="DSH Mobile 是第三方、开源的 DeepSeek Harness（DSH）Android 客户端：在手机上查看进度、处理审批与提问、继续对话。连接你自己运行的 DSH 宿主，当前为 Android 公开 alpha。">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f2ed" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#252522" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="DSH Mobile">
+  <meta property="og:title" content="DSH Mobile — 不在桌前，也跟得上你的 DSH">
+  <meta property="og:description" content="第三方开源的 DSH Android 客户端：查看进度、处理审批、继续对话。Android 公开 alpha。">
+  <meta property="og:url" content="https://fatwhale.app/">
+  <link rel="alternate" hreflang="zh-CN" href="https://fatwhale.app/">
+  <link rel="alternate" hreflang="en" href="https://fatwhale.app/en/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f4f2ed'/%3E%3Crect x='10' y='5.5' width='12' height='21' rx='3.5' fill='none' stroke='%231c1c1a' stroke-width='2'/%3E%3Ccircle cx='16' cy='22' r='1.8' fill='%233f7a52'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="https://github.com/solla-h/dsh-mobile-app">DSH Mobile</a>
-    <nav aria-label="主要导航">
-      <a href="https://github.com/solla-h/dsh-mobile-app">GitHub</a>
-      <a href="https://github.com/solla-h/dsh-mobile-app/releases">下载 APK</a>
-    </nav>
+  <a class="skip" href="#main">跳到正文</a>
+
+  <header class="masthead">
+    <div class="wrap masthead__inner">
+      <a class="brand" href="./"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile</a>
+      <nav class="nav" aria-label="主要导航">
+        <a href="#scenes">能做什么</a>
+        <a href="#start">开始使用</a>
+        <a href="#faq">常见问题</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app">GitHub</a>
+      </nav>
+      <a class="lang" href="en/" hreflang="en" lang="en">EN</a>
+    </div>
   </header>
 
-  <main>
-    <p class="status" role="status">开发中骨架，尚未上线</p>
+  <main id="main">
+    <!-- 首屏 -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero__grid">
+        <div class="hero__text">
+          <p class="eyebrow">DeepSeek Harness 的第三方手机客户端</p>
+          <h1 id="hero-title" class="display"><span class="nb">不在桌前，</span><br><span class="nb">也跟得上你的 DSH。</span></h1>
+          <p class="lede">
+            Agent 照常在你自己的宿主上运行。DSH Mobile 让你在 Android 手机上看清什么在跑、什么在等你拍板，再接着说下一句。
+          </p>
+          <div class="actions">
+            <a class="btn btn--primary" href="https://github.com/solla-h/dsh-mobile-app/releases">
+              <svg class="btn__glyph" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v7.5M4.75 6.75 8 10l3.25-3.25M3 13.25h10"/></svg>
+              获取 Android APK
+            </a>
+            <a class="link-quiet" href="#start">安装与配对 <span aria-hidden="true">→</span></a>
+          </div>
+          <ul class="terms" aria-label="使用前提">
+            <li>需要你自己运行的 DSH 宿主，并安装手机网关插件</li>
+            <li>Android 公开 alpha，从 GitHub Releases 下载后侧载安装</li>
+            <li>开源项目，与 DeepSeek 官方无关</li>
+          </ul>
+        </div>
 
-    <h1>在手机上查看 DSH 进度、处理审批、继续对话。</h1>
-
-    <p class="lede">
-      DSH Mobile 是第三方、开源的 DeepSeek Harness（DSH）Android 客户端，
-      连接用户自己运行的 DSH 宿主。当前为 Android 公开 alpha，通过 GitHub Releases
-      侧载安装；iOS 暂缓。
-    </p>
-
-    <p class="actions">
-      <a class="button" href="https://github.com/solla-h/dsh-mobile-app/releases">获取 Android APK</a>
-      <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.zh-CN.md">安装与配对指南</a>
-    </p>
-
-    <section aria-labelledby="before-you-start">
-      <h2 id="before-you-start">开始前需要知道</h2>
-      <ul>
-        <li>App 不自带模型，也不托管 DSH；需要一台运行 DSH Web 的宿主，并在对应 profile 安装
-          <code>dsh-plugin-mobile-gateway</code>。</li>
-        <li>本版本锁定 DSH <code>0.2.1-rc.5</code> + 网关 <code>0.12.0-rdv.3</code>，见
-          <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/compatibility.json">compatibility.json</a>。</li>
-        <li>语音是可选能力，需要宿主安装匹配的插件并准备好识别模型。</li>
-      </ul>
+        <figure class="hero__figure">
+          <div class="stage">
+            <div class="phone" aria-hidden="true">
+              <div class="phone__screen">
+                <div class="ui-status"></div>
+                <div class="ui-top">
+                  <span class="ui-gw"><i class="dot dot--live"></i>家里的工作站<span class="caret">⌄</span></span>
+                  <span class="ui-ws">~/projects</span>
+                </div>
+                <p class="ui-h">聚焦</p>
+                <div class="ui-grid">
+                  <div class="ui-card ui-card--attn">
+                    <span class="ui-tag ui-tag--amber">待审批</span>
+                    <b>迁移订单表</b>
+                    <span class="ui-path">~/shop-api</span>
+                    <span class="ui-snip">准备执行数据库迁移，等你确认。</span>
+                  </div>
+                  <div class="ui-card ui-card--attn">
+                    <span class="ui-tag ui-tag--amber">提问</span>
+                    <b>周报图表</b>
+                    <span class="ui-path">~/reports</span>
+                    <span class="ui-snip">按周还是按月汇总？</span>
+                  </div>
+                  <div class="ui-card">
+                    <span class="ui-tag ui-tag--live"><i class="dot dot--live"></i>运行中</span>
+                    <b>修复 CI 缓存</b>
+                    <span class="ui-path">~/site</span>
+                    <span class="ui-snip">正在重跑测试…</span>
+                  </div>
+                  <div class="ui-card">
+                    <span class="ui-tag">最近</span>
+                    <b>读书笔记整理</b>
+                    <span class="ui-path">~/notes</span>
+                    <span class="ui-snip">已按章节归档。</span>
+                  </div>
+                </div>
+                <div class="ui-orb-wrap">
+                  <span class="ui-orb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
+                  <span class="ui-orb-label">按住说话，开始新会话</span>
+                </div>
+                <div class="ui-tabs">
+                  <span class="is-on">聚焦</span><span>全部会话</span><span>定时任务</span><span>插件</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption class="plate"><b>界面示意</b><span>聚焦页，非真机截图。网关名、目录与会话内容均为虚构示例。</span></figcaption>
+        </figure>
+      </div>
     </section>
 
-    <section aria-labelledby="links">
-      <h2 id="links">相关链接</h2>
-      <ul>
-        <li><a href="https://github.com/solla-h/dsh-mobile-app">App 源码与文档</a></li>
-        <li><a href="https://github.com/solla-h/dsh-mobile-app/releases">GitHub Releases（APK、SHA256SUMS、build-info.json）</a></li>
-        <li><a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">版本兼容表</a></li>
-        <li><a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/AGENT-SETUP.md">Agent 安装手册</a></li>
-        <li><a href="https://github.com/solla-h/dsh-mobile-app/issues">问题反馈</a></li>
-      </ul>
+    <!-- 核心场景 -->
+    <section class="section" id="scenes" aria-labelledby="scenes-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">能做什么</p>
+          <div>
+            <h2 id="scenes-title" class="display">手机上，只做三件事。</h2>
+            <p class="intro">它不是一个缩小的桌面页面。离开电脑的时候，你通常只想知道进展、做个决定，或者补一句话。</p>
+          </div>
+        </div>
+
+        <ol class="scenes">
+          <li class="scene">
+            <p class="scene__no"><span class="mono">01</span><span>看一眼</span></p>
+            <div class="scene__text">
+              <h3>什么在跑，什么在等你。</h3>
+              <p>
+                聚焦页把需要你出手的会话排在最前：有待处理审批或提问的在先，其次是运行中的，最后是最近聊过的。手上有几台宿主，就从顶部在几个网关之间切换。
+              </p>
+            </div>
+            <figure class="scene__fig">
+              <div class="tray">
+                <div class="frag" aria-hidden="true">
+                  <div class="frag-card menu">
+                    <div class="menu__row is-on"><i class="dot dot--live"></i><b>家里的工作站</b><small>在线</small></div>
+                    <div class="menu__row"><i class="dot dot--idle"></i><span>实验室服务器</span><small>未连接</small></div>
+                    <div class="menu__row menu__row--add"><span>＋ 添加网关</span></div>
+                  </div>
+                  <div class="queue">
+                    <div class="queue__row"><span class="ui-tag ui-tag--amber">待审批</span><span>迁移订单表</span></div>
+                    <div class="queue__row"><span class="ui-tag ui-tag--live">运行中</span><span>修复 CI 缓存</span></div>
+                  </div>
+                </div>
+              </div>
+              <figcaption><b>界面示意</b>网关切换与聚焦排序</figcaption>
+            </figure>
+          </li>
+
+          <li class="scene">
+            <p class="scene__no"><span class="mono">02</span><span>拍个板</span></p>
+            <div class="scene__text">
+              <h3>审批与提问，就地决定。</h3>
+              <p>
+                审批卡给出真实的命令、目标文件和可用的 diff，而不只是一句摘要。高风险操作需要按住约半秒确认，拍板后还有几秒可以撤回。Agent 的提问可以选一项，也可以直接写回答。
+              </p>
+              <p class="note">App 不会替你自动批准任何东西。审批决定必须在线发送。</p>
+            </div>
+            <figure class="scene__fig">
+              <div class="tray">
+                <div class="frag" aria-hidden="true">
+                  <div class="frag-card">
+                    <div class="appr__head"><b>请求执行命令</b><span class="risk">高风险</span></div>
+                    <pre class="cmd">npm run db:migrate -- --env staging</pre>
+                    <p class="appr__why">原因：为订单表添加新的索引</p>
+                    <div class="appr__acts">
+                      <span class="ui-btn">拒绝</span>
+                      <span class="ui-btn ui-btn--hold"><i class="fill"></i><span class="label">按住允许</span></span>
+                    </div>
+                  </div>
+                  <p class="annot">按住约半秒，松手前都可以反悔</p>
+                </div>
+              </div>
+              <figcaption><b>界面示意</b>高风险审批卡</figcaption>
+            </figure>
+          </li>
+
+          <li class="scene">
+            <p class="scene__no"><span class="mono">03</span><span>说一句</span></p>
+            <div class="scene__text">
+              <h3>接着说，打字或按住说话。</h3>
+              <p>
+                回复流式到达，思考与工具调用折叠成一组，需要时再展开。Agent 还在跑时，可以把消息排队到这一轮之后，也可以插话，让它在下一步就看到。可以附上图片和文件，也可以随时停止当前回合。
+              </p>
+              <p class="note">按住说话需要宿主安装匹配的语音插件，并准备好识别模型；识别在宿主侧完成，手机本地不做识别。</p>
+            </div>
+            <figure class="scene__fig">
+              <div class="tray">
+                <div class="frag convo" aria-hidden="true">
+                  <div class="bubble">迁移先在 staging 跑，跑完告诉我耗时。</div>
+                  <span class="trace">思考与 3 次工具调用 <span>›</span></span>
+                  <p class="reply">已在 staging 完成迁移，用时约 40 秒。新索引已生效，<code>orders</code> 表查询计划已更新。</p>
+                  <div class="composer">
+                    <div class="queued"><span class="ui-tag">排队中</span>顺便把回滚脚本也写好</div>
+                    <div class="composer__row">
+                      <span class="seg"><span class="is-on">排队</span><span>插话</span></span>
+                      <span class="composer__input">输入消息…</span>
+                      <span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption><b>界面示意</b>会话页与输入框</figcaption>
+            </figure>
+          </li>
+        </ol>
+      </div>
     </section>
 
-    <p class="note">
-      本项目与 DeepSeek、Expo 官方无关。App 原创代码 MIT；宠物素材 CC BY-NC-SA 4.0，
-      仅限非商业使用。
-    </p>
+    <!-- 细节与前提 -->
+    <section class="section" id="details" aria-labelledby="details-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">细节与前提</p>
+          <div>
+            <h2 id="details-title" class="display">能做到的，和它需要的。</h2>
+            <p class="intro">每一项能力都有边界。我们把条件写在旁边，而不是藏进脚注。</p>
+          </div>
+        </div>
+
+        <div class="ledger__labels" aria-hidden="true"><span></span><span>可以</span><span>前提与限制</span></div>
+        <ul class="ledger">
+          <li>
+            <h3>离开再回来，列表和草稿都还在</h3>
+            <p><span class="tag">前提</span>会话列表、草稿和附件信息缓存在手机上。离线时写的文字进入发件箱，重连后按顺序发出；附件上传和审批决定必须在线。</p>
+          </li>
+          <li>
+            <h3>在多个网关之间切换</h3>
+            <p><span class="tag">前提</span>每个网关单独扫码配对，各自保存会话、草稿和发件箱；手机需要能访问对应的网关入口。</p>
+          </li>
+          <li>
+            <h3>入口地址变了，也能找回网关</h3>
+            <p><span class="tag">前提</span>可选的加密地址簿，需要支持它的网关和你自己的 Cloudflare 账号，恢复通常要一到三分钟。它只加密入口地址，不等于会话端到端加密，也不是使用前提。</p>
+          </li>
+          <li>
+            <h3>回到 App 时自动重连</h3>
+            <p><span class="tag">前提</span>进入后台后系统会挂起 App，回到前台时再探活重连。当前版本不提供系统推送通知，也不保证后台常驻。</p>
+          </li>
+          <li>
+            <h3>在手机上管理宿主的插件</h3>
+            <p><span class="tag">前提</span>管理的是网关背后 DSH profile 的插件。关闭或卸载手机网关本身会立即断开连接，只能回到宿主上恢复。</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 三步开始 -->
+    <section class="section" id="start" aria-labelledby="start-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">开始使用</p>
+          <div>
+            <h2 id="start-title" class="display">三步，连上你的宿主。</h2>
+            <p class="intro">这里只画路线。具体命令和锁定版本以 App 仓库的文档为准，它们会随版本更新。</p>
+          </div>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <h3>准备好 DSH 宿主</h3>
+            <p>一台持续运行 DSH Web 的电脑或服务器。DSH Mobile 不自带模型，也不托管任何服务，Agent 始终在这台机器上执行。</p>
+            <div class="links">
+              <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">查看版本兼容</a>
+            </div>
+          </li>
+          <li class="step">
+            <h3>安装手机网关，生成配对码</h3>
+            <p>
+              在对应 profile 安装 <code>dsh-plugin-mobile-gateway</code>，版本须与 App 锁定的组合一致。配对码一次性、约五分钟有效，请像对待密码一样对待它。也可以把 Agent 安装手册交给你的 DSH 代办。
+            </p>
+            <div class="links">
+              <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.zh-CN.md">中文使用说明</a>
+              <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/AGENT-SETUP.md">Agent 安装手册</a>
+            </div>
+          </li>
+          <li class="step">
+            <h3>安装 APK，扫码连接</h3>
+            <p>从 GitHub Releases 下载 APK 并允许安装；同页附有校验文件。打开 App 扫描配对码，或手动粘贴配对串。以后升级直接覆盖安装，不要先卸载。</p>
+            <div class="links">
+              <a href="https://github.com/solla-h/dsh-mobile-app/releases">打开 GitHub Releases</a>
+            </div>
+          </li>
+        </ol>
+
+        <div class="preflight">
+          <b>网络要通</b>
+          <p>手机需要能访问网关：同一 Wi-Fi 下直连，或经由 Cloudflare Tunnel、Tailscale 等入口。公网入口必须使用 <code>wss://</code>。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">常见问题</p>
+          <div>
+            <h2 id="faq-title" class="display">开始之前，你可能想问。</h2>
+          </div>
+        </div>
+
+        <div class="faq-layout">
+          <div class="spacer"></div>
+          <div class="faq">
+            <details>
+              <summary>这是 DeepSeek 官方的 App 吗？</summary>
+              <div class="answer"><p>不是。DSH Mobile 是独立的第三方开源项目，与 DeepSeek、Expo 官方均无关联。</p></div>
+            </details>
+            <details>
+              <summary>我需要准备什么？</summary>
+              <div class="answer">
+                <p>一台运行 DSH Web 的宿主、装在对应 profile 里的手机网关插件、一台 Android 手机，以及手机到网关的网络路径。</p>
+                <p>DSH 与网关的版本必须和 App 锁定的组合一致，见 <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/compatibility.json">compatibility.json</a>。</p>
+              </div>
+            </details>
+            <details>
+              <summary>模型会在手机上运行吗？</summary>
+              <div class="answer"><p>不会。Agent 在你的宿主上运行，手机只是客户端。它也不是托管的 AI 服务。</p></div>
+            </details>
+            <details>
+              <summary>语音输入需要什么条件？</summary>
+              <div class="answer"><p>宿主需要安装与 DSH 版本匹配的语音插件，并且识别模型已经就绪。模型没准备好时，App 会明确显示「语音未启用」，不会静默失败。</p></div>
+            </details>
+            <details>
+              <summary>断线了会怎样？</summary>
+              <div class="answer">
+                <p>App 会自动重连，点顶部的连接提示可以立即重试。离线时写的文字进入发件箱，重连后按顺序补发。</p>
+                <p>断线瞬间仍在途的消息可能显示「未确认」，App 不会静默重发，需要你手动重试。设备被撤销或凭据过期时，需要重新配对。</p>
+              </div>
+            </details>
+            <details>
+              <summary>有 iOS 版吗？能在应用商店下载吗？</summary>
+              <div class="answer"><p>目前都没有。iOS 版暂缓，尚未验证；Android 版通过 GitHub Releases 侧载安装，也没有在所有机型上验证过。</p></div>
+            </details>
+            <details>
+              <summary>现在的版本稳定吗？</summary>
+              <div class="answer"><p>不算稳定，这是公开 alpha，协议和界面仍在演进。当前可下载的版本、校验文件和已验证范围，请以 <a href="https://github.com/solla-h/dsh-mobile-app/releases">Releases</a> 和 <a href="https://github.com/solla-h/dsh-mobile-app">App 仓库</a>的说明为准。</p></div>
+            </details>
+            <details>
+              <summary>我的数据存在哪里？</summary>
+              <div class="answer">
+                <p>配对凭据保存在手机的安全存储里；会话历史、草稿和附件信息缓存在手机本地。App 没有接入第三方分析 SDK，但宿主、网关和你使用的隧道服务可能各自保留日志。</p>
+                <p>手机丢失时，请到网关面板撤销这台设备；只在另一台手机上移除网关并不会撤销它。</p>
+              </div>
+            </details>
+            <details>
+              <summary>采用什么开源许可？</summary>
+              <div class="answer"><p>App 原创代码采用 MIT；App 里的宠物动画素材采用 CC BY-NC-SA 4.0，仅限非商业使用。详见 <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/LICENSE">LICENSE</a> 与 <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/NOTICE">NOTICE</a>。本网站内容采用 MIT，没有使用这些素材。</p></div>
+            </details>
+            <details>
+              <summary>遇到问题去哪里反馈？</summary>
+              <div class="answer"><p>请到 <a href="https://github.com/solla-h/dsh-mobile-app/issues">GitHub Issues</a>，附上 App、网关和 DSH 的版本与复现步骤。不要贴配对二维码、设备凭据或未打码的会话截图。</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 收尾 -->
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="wrap">
+        <h2 id="closing-title" class="display">Agent 留在宿主上，<br>你不必守在桌前。</h2>
+        <p>Android 公开 alpha，免费、开源，从 GitHub Releases 侧载安装。</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="https://github.com/solla-h/dsh-mobile-app/releases">
+            <svg class="btn__glyph" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v7.5M4.75 6.75 8 10l3.25-3.25M3 13.25h10"/></svg>
+            获取 Android APK
+          </a>
+        </div>
+        <div class="more">
+          <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/USER-GUIDE.zh-CN.md">阅读使用说明</a>
+          <a href="https://github.com/solla-h/dsh-mobile-app/issues">反馈问题</a>
+          <a href="https://github.com/solla-h/dsh-mobile-app">查看源码</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>独立宣传站。当前只是开发占位页，未对外发布；页面设计与正式文案待后续完成。</p>
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <p class="brand"><span class="brand__mark" aria-hidden="true"></span>DSH Mobile</p>
+        <p>Android 公开 alpha。独立开源项目，与 DeepSeek、Expo 官方无关。</p>
+        <p>App 原创代码 MIT；宠物素材 CC BY-NC-SA 4.0，仅限非商业使用，本站未使用。本站内容 MIT。</p>
+      </div>
+      <nav aria-label="页脚链接">
+        <a href="https://github.com/solla-h/dsh-mobile-app">App 源码</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app/releases">Releases</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app/issues">Issues</a>
+        <a href="https://github.com/solla-h/dsh-mobile-site">网站源码</a>
+        <a href="en/" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
   </footer>
 </body>
 </html>
