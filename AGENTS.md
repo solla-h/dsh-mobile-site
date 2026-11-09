@@ -44,6 +44,8 @@
   静态帧，以及 `da-fei-yu-idle.webp`、`da-fei-yu-happy.webp` 原动画；来源、改动及署名
   见 `site/media/ATTRIBUTION.txt` 和 `NOTICE`。该素材及衍生图不属于 MIT，须保持署名、
   非商业和相同方式共享条件；不得据此批量复制 App 素材或改为商业用途。
+- 网站图标 `site/favicon-32.png`、`site/apple-touch-icon.png` 由项目所有者于 2026-11-09
+  提供，与宠物素材无关；替换图标时保持两条 `<link>` 引用和文件同步更新。
 - 不虚构用户数量、评价、性能指标或未验证的能力；不宣称系统推送、后台常驻、
   永不断线、零数据留存、应用商店发行或所有机型兼容。
 
