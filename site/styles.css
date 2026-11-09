@@ -222,24 +222,9 @@ p {
 }
 
 .brand__mark {
-  position: relative;
   flex: none;
-  width: 0.8rem;
+  width: 1.25rem;
   height: 1.25rem;
-  border: 1.5px solid currentColor;
-  border-radius: 0.28rem;
-}
-
-.brand__mark::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 0.2rem;
-  width: 0.28rem;
-  height: 0.28rem;
-  margin-left: -0.14rem;
-  border-radius: 50%;
-  background: var(--live);
 }
 
 .nav {
