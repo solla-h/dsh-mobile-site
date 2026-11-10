@@ -11,6 +11,16 @@
 - 原生 HTML/CSS、系统字体，无前端框架；站长统计由 Pages 注入。没有隐藏关键词、批量薄内容页或重复的 AI 专用文档。
 - Google 的 AI Overviews / AI Mode 沿用常规搜索要求，不要求特殊 schema 或 `llms.txt`。这些改动改善可理解性与抓取条件，不保证收录、排名或 AI 引用。
 
+### 2026-11-10：一轮 SEO / GEO 核对
+
+按 GitHub 开源 skill 与 Google 官方文档交叉核对，只做内容层改进，不引入新的抓取协议文件：
+
+- [Google：AI optimization guide](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide) 明确「为生成式 AI 搜索优化仍就是 SEO」，并把 `llms.txt`、内容「分块」、为 AI 改写文案、刷不真实提及、为 AI 功能过度投入结构化数据列为不需要做的事；准入条件只是页面已收录、可带摘要展示，且站点在 Search Console 中包含于生成式 AI 功能。
+- 开源 skill 参考：[AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo)、[aaron-he-zhu/seo-geo-claude-skills](https://github.com/aaron-he-zhu/seo-geo-claude-skills)、[onvoyage-ai/gtm-engineer-skills](https://github.com/onvoyage-ai/gtm-engineer-skills)、[amplifying-ai/awesome-generative-engine-optimization](https://github.com/amplifying-ai/awesome-generative-engine-optimization)。与官方不冲突的可操作项是：前置自包含定义、可引用的事实块、列表/表格、问答结构、实体身份与消歧、指向一手来源。这些 skill 自身也标注 FAQPage 富媒体结果已对多数站点退役、评分只是启发式、不得承诺快速被引用、不得把估算当作实测。
+- 基线实测：两页 title/description/canonical/hreflang/单个 h1/WebSite JSON-LD/OG/无 noindex/正文深度与层级合格；`robots.txt` 的 `Allow: /` 对 GPTBot、OAI-SearchBot、Claude-SearchBot、PerplexityBot、Googlebot、Bingbot 均返回 200，AI 爬虫没有被拦截。装饰性图片的空 `alt` 是无障碍设计，不为通过检查补写替代文本。
+- 据此新增两页「一眼看清 / At a glance」段：一句自包含定义、逐条可核对的关键事实、身份与边界声明，以及指向 App 仓库、兼容说明和 Releases 的一手来源链接。事实全部来自 [BRIEF.md](BRIEF.md) 与仓库约定的事实边界，没有新增数字、日期、作者或评价。
+- 刻意不做：`llms.txt`、AI 专用 schema（FAQPage / HowTo / SoftwareApplication）、批量页面、隐藏关键词、虚构引用或署名、为凑指标补写图片 alt。理由见上；这些改动改善可引用性与实体清晰度，不保证收录、排名或 AI 引用次数。
+
 本地与发布检查验证名称、语言残留、标题、description、canonical/hreflang、JSON-LD、robots、sitemap 和本地资源。检查器另有标准库回归测试：
 
 ```bash
