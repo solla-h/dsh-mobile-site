@@ -1,6 +1,7 @@
-# DSH Mobile App 宣传站
+# DSH Mobile App 官方介绍网站
 
-DSH Mobile App（第三方开源 Android 客户端）的独立静态宣传站仓库。
+DSH Mobile App 的官方介绍网站仓库（官网 <https://fatwhale.app/>，含中文与英文两页）；
+App 为第三方开源 Android 客户端，与 DeepSeek 官方无关。
 生产分支 `main`，唯一可部署目录是 `site/`。
 
 > **已上线：<https://fatwhale.app/>（中文）· <https://fatwhale.app/en/>（英文）。**

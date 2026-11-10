@@ -1,7 +1,10 @@
 # AGENTS.md
 
-本仓库是 DSH Mobile App 的独立静态宣传站：GitHub 仓库 `solla-h/dsh-mobile-site`，
-生产分支 `main`，唯一部署目录 `site/`。App 源码在另一个仓库，只在事实层面引用。
+本仓库是 **DSH Mobile App 的官方介绍网站**（官网 <https://fatwhale.app/>，含中文与英文两页）：
+网站仓库 `solla-h/dsh-mobile-site`，生产分支 `main`，唯一部署目录 `site/`。
+对应开源项目为 <https://github.com/solla-h/dsh-mobile-app>；App 源码在另一个仓库，只在事实层面引用。
+这里的「官方」仅指由本项目所有者维护的项目官网，不代表 DeepSeek 官方，
+也不改变「独立第三方项目、与 DeepSeek 官方无关联」的事实。
 
 ## 当前阶段
 
@@ -28,10 +31,37 @@
 
 事实冲突时以 App 仓库当前文件和 GitHub Releases 为准；发版信息不要靠记忆补。
 
+## App 迭代时的同步流程
+
+App 仓库新增特性、改协议或发新版时，本站是**只读消费方**：事实从 App 仓库取，内容写进本站，
+不改 App 仓库。按以下顺序同步，避免两份指令文档与两页站点各自漂移：
+
+1. **取事实**：先读 App 仓库当前的 `docs/USER-GUIDE.zh-CN.md`、`docs/USER-GUIDE.md`、
+   `docs/AGENT-SETUP.md`、`compatibility.json`、`docs/COMPATIBILITY.md` 与
+   [Releases](https://github.com/solla-h/dsh-mobile-app/releases)，确认新特性是否已发布、
+   是否已验证、有什么前提与限制。未验证的能力不写，发版信息不靠记忆补。
+2. **定位影响面**：按 [docs/BRIEF.md](docs/BRIEF.md) 的「内容槽位」与「事实边界」判断
+   首屏、核心场景、细节与前提、三步开始、FAQ 和两页「一眼看清」事实块哪些要改。
+3. **同步两页**：`site/index.html` 与 `site/en/index.html` 同一批修改；英文页完整英文化，
+   并保留「实际 App 界面仍为简体中文」的说明。产品名始终写 **DSH Mobile App**。
+4. **同步交接文档**：事实边界或槽位变了改 `docs/BRIEF.md`；搜索、统计或页面元数据变了改
+   `docs/DISCOVERY.md`；只有新增/删除页面才改 `site/sitemap.xml`，一般不动 `robots.txt`。
+   若品牌、canonical、hreflang、JSON-LD 或页面集合的契约要变，改 `scripts/check_site.py`
+   并补回归用例，不放宽既有检查。在 `docs/BRIEF.md` 记一条同步基线（日期 + 对齐的 App 提交
+   或 Release），便于下次判断哪些还没同步。
+5. **验证与发布**：跑 `python -I scripts/check_site.py`、
+   `python -I scripts/test_check_site.py`、`node scripts/test_demo.mjs`，本地预览两页，
+   再按 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) 的更新流程发布；push 前须获用户授权。
+
+不要做：把 App 源码或文档整篇搬进 `site/`、写死 APK 文件名或用 `/releases/latest`、
+从本站反向修改 App 仓库、为凑检查指标补写内容、宣称 App 侧尚未验证的能力。
+
 ## 页面归属
 
 - `site/`：网站页面、样式和未来的公开素材，只放可部署内容。
 - `docs/`、`scripts/`、`.github/`：交接与工具，不进入 Pages 输出。
+- `AGENTS.md` 是唯一的代理规则来源；`CLAUDE.md` 只作 `@AGENTS.md` 指针，不复制内容。
+  修改规则、事实边界或同步流程只改 `AGENTS.md`，避免两份文档漂移。
 - Claude 可按用户任务修改本仓库页面与本地部署配置；实际发布网站、绑定域名或修改线上配置须有用户授权。
 - 不要修改 App 仓库；需要新事实时提交 issue 或等待 App 侧更新链接目标。
 
