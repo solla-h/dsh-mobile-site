@@ -44,12 +44,30 @@ Windows 使用 `python -I`。线上还需验证状态码、生产响应没有 `n
 Search Console 与 Cloudflare Web Analytics 解决不同问题：前者提供查询词、展示、点击、CTR、平均排名及索引状态，后者观察站内访问和性能。
 
 2026-11-07 用户反馈已在 Edge 登录 Search Console 并提交网站，两个语言页面的“网址检查”
-均显示未被索引。该状态来自用户反馈，本轮未直接读取控制台，未独立确认资源类型、验证方式
-及 sitemap 的处理状态。后续跟踪：
+均显示未被索引；该结论来自用户反馈，当时未直接读取控制台。2026-11-10 改用本机 `bsk`
+配合 Edge 扩展直接核对控制台，状态已经变化，以下均为实测结果：
 
-1. 确认 `https://fatwhale.app/sitemap.xml` 的处理状态为成功；已成功则不重复提交。
-2. 分别检查 `/` 和 `/en/`，实时测试通过且尚未收录时，可各请求一次编入索引；重复请求不会加速抓取。
-3. 每周观察品牌词、DeepSeek Harness 相关查询和两种语言页面的展示、点击及 CTR。Google 的 AI 搜索流量计入 Web 类型，不能从总量中直接推算 AI 引用次数。
+- 资源为网域资源 `sc-domain:fatwhale.app`。`/` 与 `/en/` 均显示“网址已收录到 Google /
+  网页已编入索引”，HTTPS 正常；界面已有“已请求编入索引 / 再次提交请求”，说明此前请求已生效。
+  本轮**没有**再次请求编入索引：页面已收录，重复请求不会加速抓取。
+- 站点地图起初“已提交的站点地图”为 0 行，本轮提交 `https://fatwhale.app/sitemap.xml` 后
+  状态“成功”、已发现 2 个网页、上次读取 2026-11-10；已成功则不重复提交。
+- “效果”报告（2026-11-05 至 2026-11-08，约 4 小时前更新）：总点击 0、总展示 12、CTR 0%、
+  平均排名 9.8；查询 `dsh mobile` 6 次展示、`dsh mobile app` 2 次、`dsh-mobile` 1 次。
+  站点已被收录但展示极少，搜索品牌词时经常不出现在结果页；这是新域名权重与同名项目竞争，
+  不再是收录或技术抓取问题。GSC 数据约滞后两天，不能据此推断 AI 引用次数或未来排名。
+
+Bing 是独立索引，Google Search Console 的提交不影响它。“Import from Google Search Console”
+返回“未找到站点”，改用 XML 文件验证：`site/BingSiteAuth.xml` 已部署，线上
+`https://fatwhale.app/BingSiteAuth.xml` 返回 200 / `application/xml`，内容与下载文件逐字节一致。
+仍需在 Bing Webmaster Tools 点“Verify”并提交 sitemap；Bing 的抓取与收录尚待其自身完成。
+
+后续跟踪：
+
+1. 不重复提交 sitemap，也不再对已收录页面请求编入索引。
+2. 每周观察品牌词、DeepSeek Harness 相关查询和两种语言页面的展示、点击及 CTR；Google 的
+   AI 搜索流量计入 Web 类型，不能从总量中直接推算 AI 引用次数。
+3. Bing 侧确认验证与 sitemap 提交成功，并单独跟踪其收录情况；不以少量展示推断产品需求。
 
 ## 验证记录
 
