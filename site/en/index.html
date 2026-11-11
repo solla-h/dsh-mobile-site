@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="canonical" href="https://fatwhale.app/en/">
-  <title>DSH Mobile App — Android Client for DeepSeek Harness</title>
-  <meta name="description" content="DSH Mobile App is a third-party, open-source Android client for DeepSeek Harness: check progress, handle approvals and continue conversations. Requires your own host and mobile gateway. Public alpha, sideloaded from GitHub Releases.">
+  <title>FatWhale · DSH Mobile App | DeepSeek Harness Android Client</title>
+  <meta name="description" content="FatWhale is the independent site brand for DSH Mobile App, a third-party, open-source Android client for DeepSeek Harness: check progress, handle approvals and continue conversations. Requires your own host and mobile gateway. Public alpha, sideloaded from GitHub Releases.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f4f2ed" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#252522" media="(prefers-color-scheme: dark)">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
-  <meta property="og:site_name" content="DSH Mobile App">
-  <meta property="og:title" content="DSH Mobile App — Android Client for DeepSeek Harness">
-  <meta property="og:description" content="A third-party, open-source Android client for DeepSeek Harness. Check progress, handle approvals and keep talking. Requires your own host and mobile gateway. Public alpha.">
+  <meta property="og:site_name" content="FatWhale · DSH Mobile App">
+  <meta property="og:title" content="FatWhale · DSH Mobile App | DeepSeek Harness Android Client">
+  <meta property="og:description" content="The FatWhale site: a third-party, open-source Android client for DeepSeek Harness. Check progress, handle approvals and keep talking. Requires your own host and mobile gateway. Public alpha.">
   <meta property="og:url" content="https://fatwhale.app/en/">
   <link rel="alternate" hreflang="zh-CN" href="https://fatwhale.app/">
   <link rel="alternate" hreflang="en" href="https://fatwhale.app/en/">
@@ -27,6 +27,23 @@
       "name": "DSH Mobile App",
       "url": "https://fatwhale.app/",
       "inLanguage": ["zh-CN", "en"]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "@id": "https://fatwhale.app/#software",
+      "name": "DSH Mobile App",
+      "alternateName": "FatWhale DSH Mobile App",
+      "url": "https://fatwhale.app/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Android",
+      "downloadUrl": "https://github.com/solla-h/dsh-mobile-app/releases",
+      "softwareRequirements": "A self-hosted DeepSeek Harness (DSH) host with the matching mobile gateway plugin",
+      "isAccessibleForFree": true,
+      "license": "https://github.com/solla-h/dsh-mobile-app/blob/master/LICENSE",
+      "inLanguage": "zh-CN"
     }
   </script>
   <link rel="stylesheet" href="../styles.css">
@@ -52,12 +69,13 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero__grid">
         <div class="hero__text">
-          <p class="eyebrow">A third-party phone client for DeepSeek Harness</p>
+          <p class="eyebrow">FatWhale · A third-party phone client for DeepSeek Harness</p>
           <h1 id="hero-title" class="display"><span class="nb">Keep up with DSH,</span><br><span class="nb">away from your desk.</span></h1>
           <p class="lede">
-            DSH Mobile App is a third-party, open-source Android client for DeepSeek Harness (DSH).
-            Your agent runs on your own host; use your phone to check progress, handle approvals
-            and questions, and continue the conversation away from your computer.
+            FatWhale is this site&rsquo;s independent project brand. DSH Mobile App is a third-party,
+            open-source Android client for DeepSeek Harness (DSH). Your agent runs on your own host;
+            use your phone to check progress, handle approvals and questions, and continue the
+            conversation away from your computer.
           </p>
           <div class="actions">
             <a class="btn btn--primary" href="https://github.com/solla-h/dsh-mobile-app/releases">
@@ -166,7 +184,7 @@
           </div>
           <div class="facts__row">
             <dt>Official entry points</dt>
-            <dd><a href="https://fatwhale.app/">fatwhale.app</a> is the project website. Source, releases and issue reports live at <a href="https://github.com/solla-h/dsh-mobile-app">solla-h/dsh-mobile-app</a> on GitHub. Exact commands and pinned versions come from that repository, not from this page.</dd>
+            <dd><a href="https://fatwhale.app/">fatwhale.app (FatWhale)</a> is the project website; FatWhale is the site brand, while the product name remains DSH Mobile App. Source, releases and issue reports live at <a href="https://github.com/solla-h/dsh-mobile-app">solla-h/dsh-mobile-app</a> on GitHub. Exact commands and pinned versions come from that repository, not from this page.</dd>
           </div>
         </dl>
         <p class="facts__source">The <a href="https://github.com/solla-h/dsh-mobile-app">app repository</a>, its <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">compatibility notes</a> and <a href="https://github.com/solla-h/dsh-mobile-app/releases">GitHub Releases</a> are the sources of truth for these facts.</p>
@@ -440,6 +458,7 @@
           <b>Reachability</b>
           <p>Your phone must be able to reach the gateway: directly on the same Wi-Fi, or through Cloudflare Tunnel, Tailscale or similar. Public endpoints must use <code>wss://</code>.</p>
         </div>
+        <p class="facts__source">Detailed Chinese guides: <a href="../install/" lang="zh-CN">安装与配对教程</a>, <a href="../compatibility/" lang="zh-CN">版本兼容说明</a>, <a href="../download/" lang="zh-CN">APK 下载页</a>, <a href="../faq/" lang="zh-CN">常见问题</a>.</p>
       </div>
     </section>
 
@@ -542,11 +561,15 @@
     <div class="wrap footer__grid">
       <div>
         <p class="brand"><img class="brand__mark" src="../favicon-32.png" width="32" height="32" alt="">DSH Mobile App</p>
-        <p>Public Android alpha. An independent open-source project, not affiliated with DeepSeek or Expo.</p>
+        <p>Public Android alpha. FatWhale is this site&rsquo;s independent brand; the product name is DSH Mobile App. Not affiliated with DeepSeek or Expo.</p>
         <p>Original app and site code and text: MIT. The displayed pet artwork: CC BY-NC-SA 4.0, non-commercial only. <a href="../media/ATTRIBUTION.txt">Artwork credits and license</a></p>
         <p>This site uses <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a> for page traffic and performance, without cookies to identify visitors.</p>
       </div>
       <nav aria-label="Footer">
+        <a href="../install/" lang="zh-CN">安装与配对教程</a>
+        <a href="../compatibility/" lang="zh-CN">版本兼容说明</a>
+        <a href="../faq/" lang="zh-CN">常见问题</a>
+        <a href="../download/" lang="zh-CN">APK 下载</a>
         <a href="https://github.com/solla-h/dsh-mobile-app">App source</a>
         <a href="https://github.com/solla-h/dsh-mobile-app/releases">Releases</a>
         <a href="https://github.com/solla-h/dsh-mobile-app/issues">Issues</a>

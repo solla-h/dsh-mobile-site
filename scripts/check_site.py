@@ -6,10 +6,12 @@ Usage:
 
 Checks every HTML file under site/ for a non-empty <html lang>, <title> and
 viewport meta, then verifies that local href/src references and CSS url()
-resources exist inside site/. Also enforces the known bilingual contract:
-both pages' title/description/canonical/hreflang/WebSite JSON-LD, robots.txt,
-sitemap.xml, the DSH Mobile App brand name, and no Chinese left in English
-content outside the zh-CN language switches. No third-party dependencies.
+resources exist inside site/. Also enforces the site contract: both landing
+pages' title/description/canonical/hreflang/WebSite + SoftwareApplication
+JSON-LD and FatWhale site brand, the four Chinese topic pages and their
+canonicals/topics/internal links, robots.txt, sitemap.xml, the DSH Mobile App
+brand name, and no Chinese left in English content outside the zh-CN language
+switches. No third-party dependencies.
 """
 
 from __future__ import annotations
@@ -28,16 +30,27 @@ SITE = ROOT / "site"
 SITE_URL = "https://fatwhale.app/"
 BRAND = "DSH Mobile App"
 FEATURE = "DeepSeek Harness"
+BRAND_ALIAS = "FatWhale"
+RELEASES_URL = "https://github.com/solla-h/dsh-mobile-app/releases"
 EXPECTED_PAGES = {
     "index.html": SITE_URL,
     "en/index.html": "https://fatwhale.app/en/",
+}
+CONTENT_PAGES = {
+    "install/index.html": ("https://fatwhale.app/install/", "安装与配对"),
+    "compatibility/index.html": ("https://fatwhale.app/compatibility/", "版本兼容"),
+    "faq/index.html": ("https://fatwhale.app/faq/", "常见问题"),
+    "download/index.html": ("https://fatwhale.app/download/", "APK 下载"),
 }
 EXPECTED_HREFLANGS = {
     "zh-cn": SITE_URL,
     "en": "https://fatwhale.app/en/",
 }
 SITEMAP_URL = "https://fatwhale.app/sitemap.xml"
-SITEMAP_LOCS = set(EXPECTED_PAGES.values())
+SITEMAP_LOCS = set(EXPECTED_PAGES.values()) | {
+    canonical for canonical, _topic in CONTENT_PAGES.values()
+}
+FORBIDDEN_SOFTWARE_FIELDS = {"aggregateRating", "review", "softwareVersion", "offers"}
 OLD_BRAND_RE = re.compile(r"DSH\s+Mobile(?!\s+App)")
 CJK_RE = re.compile(r"[㐀-䶿一-鿿豈-﫿]")
 ROBOTS_SITEMAP_RE = re.compile(r"sitemap:\s*https://fatwhale\.app/sitemap\.xml", re.IGNORECASE)
@@ -64,6 +77,7 @@ class PageParser(HTMLParser):
         self.lang = ""
         self.viewport = ""
         self.description = ""
+        self.og_site_name = ""
         self.noindex = False
         self.canonicals: list[str] = []
         self.hreflangs: list[tuple[str, str]] = []
@@ -94,6 +108,8 @@ class PageParser(HTMLParser):
             elif name in {"robots", "googlebot"}:
                 directives = re.split(r"[\s,]+", values.get("content", "").lower())
                 self.noindex |= bool({"noindex", "none"}.intersection(directives))
+            elif values.get("property", "").strip().lower() == "og:site_name":
+                self.og_site_name = values.get("content", "").strip()
         elif tag == "link":
             rels = values.get("rel", "").lower().split()
             href = values.get("href", "").strip()
@@ -270,6 +286,82 @@ def check_website_jsonld(parser: PageParser, label: str, errors: list[str]) -> N
         errors.append(f"{label}: missing WebSite JSON-LD")
 
 
+def check_software_jsonld(parser: PageParser, label: str, errors: list[str]) -> None:
+    software = None
+    for raw in parser.jsonld:
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            continue  # already reported by check_website_jsonld
+        for item in data if isinstance(data, list) else [data]:
+            if isinstance(item, dict) and item.get("@type") == "SoftwareApplication":
+                software = item
+
+    if software is None:
+        errors.append(f"{label}: missing SoftwareApplication JSON-LD")
+        return
+
+    if software.get("@context") != "https://schema.org":
+        errors.append(f'{label}: SoftwareApplication @context must be "https://schema.org"')
+    if software.get("name") != BRAND:
+        errors.append(f'{label}: SoftwareApplication name must be "{BRAND}"')
+    if software.get("url") != SITE_URL:
+        errors.append(f'{label}: SoftwareApplication url must be "{SITE_URL}"')
+    if software.get("operatingSystem") != "Android":
+        errors.append(f'{label}: SoftwareApplication operatingSystem must be "Android"')
+    if not software.get("applicationCategory"):
+        errors.append(f"{label}: SoftwareApplication needs an applicationCategory")
+    if software.get("downloadUrl") != RELEASES_URL:
+        errors.append(
+            f"{label}: SoftwareApplication downloadUrl must be {RELEASES_URL}; "
+            "do not pin an APK filename or use /releases/latest"
+        )
+    for key in sorted(FORBIDDEN_SOFTWARE_FIELDS & software.keys()):
+        errors.append(
+            f"{label}: SoftwareApplication must not declare {key} "
+            "(no invented ratings, reviews or pinned versions)"
+        )
+
+
+def check_brand_positioning(pages: dict[str, PageParser], errors: list[str]) -> None:
+    for rel in EXPECTED_PAGES:
+        parser = pages.get(rel)
+        if parser is None:
+            continue
+        label = f"site/{rel}"
+        if BRAND_ALIAS not in parser.title:
+            errors.append(f'{label}: <title> must contain the site brand "{BRAND_ALIAS}"')
+        if BRAND_ALIAS not in parser.description:
+            errors.append(f'{label}: meta description must contain "{BRAND_ALIAS}"')
+        if BRAND_ALIAS not in parser.og_site_name:
+            errors.append(f'{label}: og:site_name must contain "{BRAND_ALIAS}"')
+
+
+def check_content_pages(pages: dict[str, PageParser], errors: list[str]) -> None:
+    for rel, (canonical, topic) in CONTENT_PAGES.items():
+        parser = pages.get(rel)
+        label = f"site/{rel}"
+        if parser is None:
+            errors.append(f"{label}: missing content page")
+            continue
+        if parser.canonicals != [canonical]:
+            errors.append(f"{label}: canonical must be exactly {canonical}")
+        if BRAND not in parser.title:
+            errors.append(f'{label}: <title> must contain "{BRAND}"')
+        if topic not in parser.title:
+            errors.append(f'{label}: <title> must target its topic "{topic}"')
+        if BRAND_ALIAS not in parser.title:
+            errors.append(f'{label}: <title> must contain the site brand "{BRAND_ALIAS}"')
+        if not parser.description:
+            errors.append(f"{label}: missing non-empty meta description")
+        internal = [
+            ref for tag, _attr, ref in parser.refs
+            if tag == "a" and is_local_ref(ref)
+        ]
+        if len(internal) < 2:
+            errors.append(f"{label}: needs at least two internal page links (orphan page)")
+
+
 def check_bilingual(pages: dict[str, PageParser], errors: list[str]) -> None:
     for rel, canonical in EXPECTED_PAGES.items():
         parser = pages.get(rel)
@@ -293,6 +385,7 @@ def check_bilingual(pages: dict[str, PageParser], errors: list[str]) -> None:
                 errors.append(f"{label}: hreflang {lang} must point to {href}")
 
         check_website_jsonld(parser, label, errors)
+        check_software_jsonld(parser, label, errors)
 
     english = pages.get("en/index.html")
     if english is not None and english.chinese_leaks:
@@ -319,7 +412,7 @@ def check_sitemap(errors: list[str]) -> None:
     if root.tag != namespace + "urlset":
         errors.append("site/sitemap.xml: expected sitemap urlset namespace")
     locs = [(element.text or "").strip() for element in root.findall(f"{namespace}url/{namespace}loc")]
-    if len(locs) != 2 or set(locs) != SITEMAP_LOCS:
+    if len(locs) != len(SITEMAP_LOCS) or set(locs) != SITEMAP_LOCS:
         expected = " and ".join(sorted(SITEMAP_LOCS))
         errors.append(f"site/sitemap.xml: must list exactly two URLs: {expected}")
 
@@ -366,6 +459,8 @@ def main() -> int:
         check_css(path, errors, counter)
 
     check_bilingual(pages, errors)
+    check_brand_positioning(pages, errors)
+    check_content_pages(pages, errors)
     check_sitemap(errors)
     check_robots(errors)
 

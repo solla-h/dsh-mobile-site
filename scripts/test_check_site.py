@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Regression checks for scripts/check_site.py against the bilingual contract.
+"""Regression checks for scripts/check_site.py against the site contract.
 
 Usage:
     python3 -I scripts/test_check_site.py
 
 Builds a minimal site/ fixture in a temp directory, copies check_site.py next
 to it and runs that copy as a subprocess. Asserts the valid fixture passes and
-that a wrong canonical, broken JSON-LD, a missing sitemap URL and Chinese left
-in English content are rejected. Standard library only, no third-party deps.
+that broken canonicals, JSON-LD, sitemap entries, topic pages, SoftwareApplication
+data, brand positioning and Chinese left in English content are rejected.
+Standard library only, no third-party deps.
 """
 
 from __future__ import annotations
@@ -20,33 +21,46 @@ from pathlib import Path
 
 CHECK_SITE = Path(__file__).resolve().parent / "check_site.py"
 
+WEBSITE_JSONLD = '{"@context": "https://schema.org", "@type": "WebSite", "name": "DSH Mobile App", "url": "https://fatwhale.app/"}'
+SOFTWARE_JSONLD = (
+    '{"@context": "https://schema.org", "@type": "SoftwareApplication", '
+    '"name": "DSH Mobile App", "url": "https://fatwhale.app/", '
+    '"applicationCategory": "DeveloperApplication", "operatingSystem": "Android", '
+    '"downloadUrl": "https://github.com/solla-h/dsh-mobile-app/releases"}'
+)
+RELEASES_FIELD = '"downloadUrl": "https://github.com/solla-h/dsh-mobile-app/releases"'
+
 ZH_PAGE = """<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DSH Mobile App — DeepSeek Harness 第三方 Android 客户端</title>
-  <meta name="description" content="DSH Mobile App 是配套 DeepSeek Harness 的第三方 Android 客户端。">
+  <title>大肥鱼 FatWhale · DSH Mobile App — DeepSeek Harness 第三方 Android 客户端</title>
+  <meta name="description" content="大肥鱼 FatWhale 官网。DSH Mobile App 是配套 DeepSeek Harness 的第三方 Android 客户端。">
+  <meta property="og:site_name" content="大肥鱼 FatWhale · DSH Mobile App">
   <link rel="canonical" href="https://fatwhale.app/">
   <link rel="alternate" hreflang="zh-CN" href="https://fatwhale.app/">
   <link rel="alternate" hreflang="en" href="https://fatwhale.app/en/">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "DSH Mobile App", "url": "https://fatwhale.app/"}</script>
+  <script type="application/ld+json">WEBSITE_JSONLD</script>
+  <script type="application/ld+json">SOFTWARE_JSONLD</script>
 </head>
 <body><a href="en/" hreflang="en" lang="en">English</a></body>
 </html>
-"""
+""".replace("WEBSITE_JSONLD", WEBSITE_JSONLD).replace("SOFTWARE_JSONLD", SOFTWARE_JSONLD)
 
 EN_PAGE = """<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DSH Mobile App — Android Client for DeepSeek Harness</title>
-  <meta name="description" content="DSH Mobile App is an open-source Android client for DeepSeek Harness.">
+  <title>FatWhale · DSH Mobile App — Android Client for DeepSeek Harness</title>
+  <meta name="description" content="FatWhale is the site brand for DSH Mobile App, an open-source Android client for DeepSeek Harness.">
+  <meta property="og:site_name" content="FatWhale · DSH Mobile App">
   <link rel="canonical" href="https://fatwhale.app/en/">
   <link rel="alternate" hreflang="zh-CN" href="https://fatwhale.app/">
   <link rel="alternate" hreflang="en" href="https://fatwhale.app/en/">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "DSH Mobile App", "url": "https://fatwhale.app/"}</script>
+  <script type="application/ld+json">WEBSITE_JSONLD</script>
+  <script type="application/ld+json">SOFTWARE_JSONLD</script>
 </head>
 <body>
   <header><a href="../" hreflang="zh-CN" lang="zh-CN">中文</a></header>
@@ -54,7 +68,33 @@ EN_PAGE = """<!doctype html>
   <footer><a href="../" hreflang="zh-CN" lang="zh-CN">简体中文</a></footer>
 </body>
 </html>
+""".replace("WEBSITE_JSONLD", WEBSITE_JSONLD).replace("SOFTWARE_JSONLD", SOFTWARE_JSONLD)
+
+CONTENT_PAGES = {
+    "install/index.html": ("https://fatwhale.app/install/", "安装与配对"),
+    "compatibility/index.html": ("https://fatwhale.app/compatibility/", "版本兼容"),
+    "faq/index.html": ("https://fatwhale.app/faq/", "常见问题"),
+    "download/index.html": ("https://fatwhale.app/download/", "APK 下载"),
+}
+
+
+def content_page(canonical: str, topic: str) -> str:
+    return f"""<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSH Mobile App {topic}｜大肥鱼 FatWhale</title>
+  <meta name="description" content="大肥鱼 FatWhale 官网：DSH Mobile App {topic} 专题页。">
+  <link rel="canonical" href="{canonical}">
+</head>
+<body>
+  <a href="../">首页</a>
+  <a href="../faq/">常见问题</a>
+</body>
+</html>
 """
+
 
 ROBOTS = "User-agent: *\nAllow: /\nSitemap: https://fatwhale.app/sitemap.xml\n"
 
@@ -62,10 +102,14 @@ SITEMAP = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://fatwhale.app/</loc></url>
   <url><loc>https://fatwhale.app/en/</loc></url>
+  <url><loc>https://fatwhale.app/install/</loc></url>
+  <url><loc>https://fatwhale.app/compatibility/</loc></url>
+  <url><loc>https://fatwhale.app/faq/</loc></url>
+  <url><loc>https://fatwhale.app/download/</loc></url>
 </urlset>
 """
 
-JSONLD = '{"@context": "https://schema.org", "@type": "WebSite", "name": "DSH Mobile App", "url": "https://fatwhale.app/"}'
+JSONLD = WEBSITE_JSONLD
 
 
 def write_fixture(root: Path) -> None:
@@ -73,6 +117,10 @@ def write_fixture(root: Path) -> None:
     (site / "en").mkdir(parents=True)
     (site / "index.html").write_text(ZH_PAGE, encoding="utf-8")
     (site / "en" / "index.html").write_text(EN_PAGE, encoding="utf-8")
+    for rel, (canonical, topic) in CONTENT_PAGES.items():
+        path = site / rel
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content_page(canonical, topic), encoding="utf-8")
     (site / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (site / "sitemap.xml").write_text(SITEMAP, encoding="utf-8")
 
@@ -166,6 +214,86 @@ def test_missing_pet_animation_fails() -> None:
     assert result.returncode != 0 and "missing-pet.webp" in result.stdout, result.stdout
 
 
+def test_missing_software_jsonld_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(
+            site / "index.html",
+            f'  <script type="application/ld+json">{SOFTWARE_JSONLD}</script>\n',
+            "",
+        )
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "SoftwareApplication" in result.stdout, result.stdout
+
+
+def test_bad_download_url_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(
+            site / "index.html",
+            RELEASES_FIELD,
+            RELEASES_FIELD.replace('releases"', 'releases/latest"'),
+        )
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "downloadUrl" in result.stdout, result.stdout
+
+
+def test_invented_rating_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(
+            site / "en" / "index.html",
+            '"@type": "SoftwareApplication",',
+            '"@type": "SoftwareApplication", "aggregateRating": {"@type": "AggregateRating"},',
+        )
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "aggregateRating" in result.stdout, result.stdout
+
+
+def test_missing_brand_alias_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(site / "index.html", "<title>大肥鱼 FatWhale · ", "<title>")
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "FatWhale" in result.stdout, result.stdout
+
+
+def test_content_page_wrong_canonical_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(
+            site / "install" / "index.html",
+            '<link rel="canonical" href="https://fatwhale.app/install/">',
+            '<link rel="canonical" href="https://fatwhale.app/">',
+        )
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "canonical" in result.stdout, result.stdout
+
+
+def test_content_page_missing_topic_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(site / "install" / "index.html", "DSH Mobile App 安装与配对｜", "DSH Mobile App 专题｜")
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "topic" in result.stdout, result.stdout
+
+
+def test_orphan_content_page_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(site / "install" / "index.html", '  <a href="../faq/">常见问题</a>\n', "")
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "internal" in result.stdout, result.stdout
+
+
+def test_sitemap_missing_content_page_fails() -> None:
+    def mutate(site: Path) -> None:
+        replace(site / "sitemap.xml", "<url><loc>https://fatwhale.app/faq/</loc></url>\n", "")
+
+    result = run_checker(mutate)
+    assert result.returncode != 0 and "sitemap" in result.stdout.lower(), result.stdout
+
+
 def main() -> int:
     tests = (
         test_valid_fixture_passes,
@@ -175,6 +303,14 @@ def main() -> int:
         test_missing_sitemap_url_fails,
         test_chinese_in_english_page_fails,
         test_missing_pet_animation_fails,
+        test_missing_software_jsonld_fails,
+        test_bad_download_url_fails,
+        test_invented_rating_fails,
+        test_missing_brand_alias_fails,
+        test_content_page_wrong_canonical_fails,
+        test_content_page_missing_topic_fails,
+        test_orphan_content_page_fails,
+        test_sitemap_missing_content_page_fails,
     )
     for test in tests:
         test()

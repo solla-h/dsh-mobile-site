@@ -4,10 +4,10 @@
 
 ## SEO / GEO 实施
 
-- 两页统一产品名称；标题与可见首段直接说明 DeepSeek Harness、Android 和第三方身份。
+- 两页统一产品名称；标题与可见首段直接说明 DeepSeek Harness、Android、第三方身份，并带上可独占的站点品牌「大肥鱼 / FatWhale」。
 - 保留各自 canonical、完整绝对地址的双向 hreflang，以及直接可抓取的 HTML 正文、FAQ 和普通链接。
-- `WebSite` JSON-LD 使用同一站点名称和根域 URL，帮助明确网站身份。没有虚构评分、评论或下载量；本轮不追求软件评分富媒体结果。
-- `site/sitemap.xml` 只列中文、英文两个 canonical URL；`site/robots.txt` 提供 sitemap 地址并允许抓取。不添加没有维护依据的 lastmod，也不设置无效的 priority/changefreq。
+- `WebSite` JSON-LD 使用同一站点名称和根域 URL；两页另有 `SoftwareApplication` JSON-LD，说明 `operatingSystem: Android`、`applicationCategory: DeveloperApplication` 与指向 GitHub Releases 的 `downloadUrl`。没有虚构评分、评论、软件版本或下载量，也不追求软件评分富媒体结果。
+- `site/sitemap.xml` 列六个 canonical URL（中英首页 + 四个中文专题页）；`site/robots.txt` 提供 sitemap 地址并允许抓取。不添加没有维护依据的 lastmod，也不设置无效的 priority/changefreq。
 - 原生 HTML/CSS、系统字体，无前端框架；站长统计由 Pages 注入。没有隐藏关键词、批量薄内容页或重复的 AI 专用文档。
 - Google 的 AI Overviews / AI Mode 沿用常规搜索要求，不要求特殊 schema 或 `llms.txt`。这些改动改善可理解性与抓取条件，不保证收录、排名或 AI 引用。
 
@@ -19,7 +19,8 @@
 - 开源 skill 参考：[AgriciDaniel/claude-seo](https://github.com/AgriciDaniel/claude-seo)、[aaron-he-zhu/seo-geo-claude-skills](https://github.com/aaron-he-zhu/seo-geo-claude-skills)、[onvoyage-ai/gtm-engineer-skills](https://github.com/onvoyage-ai/gtm-engineer-skills)、[amplifying-ai/awesome-generative-engine-optimization](https://github.com/amplifying-ai/awesome-generative-engine-optimization)。与官方不冲突的可操作项是：前置自包含定义、可引用的事实块、列表/表格、问答结构、实体身份与消歧、指向一手来源。这些 skill 自身也标注 FAQPage 富媒体结果已对多数站点退役、评分只是启发式、不得承诺快速被引用、不得把估算当作实测。
 - 基线实测：两页 title/description/canonical/hreflang/单个 h1/WebSite JSON-LD/OG/无 noindex/正文深度与层级合格；`robots.txt` 的 `Allow: /` 对 GPTBot、OAI-SearchBot、Claude-SearchBot、PerplexityBot、Googlebot、Bingbot 均返回 200，AI 爬虫没有被拦截。装饰性图片的空 `alt` 是无障碍设计，不为通过检查补写替代文本。
 - 据此新增两页「一眼看清 / At a glance」段：一句自包含定义、逐条可核对的关键事实、身份与边界声明，以及指向 App 仓库、兼容说明和 Releases 的一手来源链接。事实全部来自 [BRIEF.md](BRIEF.md) 与仓库约定的事实边界，没有新增数字、日期、作者或评价。
-- 刻意不做：`llms.txt`、AI 专用 schema（FAQPage / HowTo / SoftwareApplication）、批量页面、隐藏关键词、虚构引用或署名、为凑指标补写图片 alt。理由见上；这些改动改善可引用性与实体清晰度，不保证收录、排名或 AI 引用次数。
+- 当日刻意不做：`llms.txt`、AI 专用 schema（FAQPage / HowTo / SoftwareApplication）、批量页面、隐藏关键词、虚构引用或署名、为凑指标补写图片 alt。理由见上。
+- **2026-11-11 调整**：按用户要求改为「四个有实质内容的中文专题页 + 两页 SoftwareApplication 结构化数据」。这不是推翻上一条的判断依据，而是把目标从「只做内容层」扩展到「按查询意图拆页 + 明确软件实体」：专题页各自回答安装、兼容、FAQ、下载四类问题，不是复制首页段落或批量薄内容；SoftwareApplication 只写可核对的系统、类别和下载入口，不补评分、评论、软件版本或下载量。仍然不做 `llms.txt`、FAQPage / HowTo 富媒体 schema、隐藏关键词和虚构引用；不承诺收录、排名或 AI 引用收益。
 
 本地与发布检查验证名称、语言残留、标题、description、canonical/hreflang、JSON-LD、robots、sitemap 和本地资源。检查器另有标准库回归测试：
 
@@ -29,6 +30,21 @@ python3 -I scripts/check_site.py
 ```
 
 Windows 使用 `python -I`。线上还需验证状态码、生产响应没有 `noindex`、正文和样式可抓取；本地通过不能证明 Google 已收录。
+
+### 2026-11-11：专题页与软件实体
+
+| 页面 | 对准的查询意图 | 主要一手来源 |
+| --- | --- | --- |
+| `/` `/en/` | 品牌与产品定位 | 本站 BRIEF.md |
+| `/install/` | DSH Mobile App 安装教程 / 配对 | AGENT-SETUP.md、USER-GUIDE.zh-CN.md |
+| `/compatibility/` | DSH Mobile App 版本兼容 | compatibility.json、COMPATIBILITY.md |
+| `/faq/` | DSH Mobile App 常见问题 | USER-GUIDE.zh-CN.md、BRIEF.md |
+| `/download/` | DeepSeek Harness 安卓客户端 / APK 下载 | GitHub Releases |
+
+页面主题词是定位，不是搜索量数据；GSC 实测查询词见上文。四个专题页只有中文版，英文页通过标注语言的链接给出入口，不设置会误导的 hreflang 配对。
+`SoftwareApplication` 的 `downloadUrl` 指向 Releases 列表页而非某个 APK 文件，因为项目约定禁止写死文件名或使用 `/releases/latest`；因此不追求软件评分富媒体结果。
+sitemap 扩为六个 URL；已提交的 sitemap 会由搜索引擎自行重抓，不重复提交，也不对已收录页面重复请求编入索引。
+本地检查器新增内容页、SoftwareApplication 与品牌词校验，回归用例从 7 项增至 15 项；`python -I scripts/check_site.py`、`python -I scripts/test_check_site.py`、`node scripts/test_demo.mjs` 均通过，六个页面本地预览均返回 200。上线与收录效果仍需发布后观察。
 
 ## 站长统计
 

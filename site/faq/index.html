@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://fatwhale.app/faq/">
+  <title>DSH Mobile App 常见问题 FAQ｜大肥鱼 FatWhale</title>
+  <meta name="description" content="DSH Mobile App 常见问题：是否 DeepSeek 官方、需要哪些前提、版本兼容怎么查、断线与离线行为、语音条件、数据安全、许可与 iOS / 应用商店状态。按主题分组，附一手来源与专题页链接。">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f2ed" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#252522" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="大肥鱼 FatWhale · DSH Mobile App">
+  <meta property="og:title" content="DSH Mobile App 常见问题 FAQ｜大肥鱼 FatWhale">
+  <meta property="og:description" content="身份、前提、版本、连接、数据、许可——按主题分组的常见问题与明确边界。">
+  <meta property="og:url" content="https://fatwhale.app/faq/">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+
+  <header class="masthead">
+    <div class="wrap masthead__inner">
+      <a class="brand" href="../"><img class="brand__mark" src="../favicon-32.png" width="32" height="32" alt="">DSH Mobile App</a>
+      <nav class="nav" aria-label="主要导航">
+        <a href="../install/">安装教程</a>
+        <a href="../compatibility/">版本兼容</a>
+        <a href="../faq/">常见问题</a>
+        <a href="../download/">APK 下载</a>
+      </nav>
+      <a class="lang" href="../en/" hreflang="en" lang="en">EN</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-labelledby="page-title">
+      <div class="wrap">
+        <p class="eyebrow">大肥鱼 FatWhale · 专题指南</p>
+        <h1 id="page-title" class="display">DSH Mobile App 常见问题</h1>
+        <p class="facts__definition">这里按「身份、前提、版本、连接、数据与许可」把 DSH Mobile App 的常见疑问集中回答，并写清哪些能力有前提、哪些还没被验证。DSH Mobile App 是配套 DeepSeek Harness（DSH）的第三方开源 Android 客户端，与 DeepSeek 官方无关联；当前为公开 alpha，通过 GitHub Releases 侧载安装。需要动手时看<a href="../install/">安装与配对教程</a>，需要对齐版本时看<a href="../compatibility/">版本兼容说明</a>。</p>
+      </div>
+    </section>
+
+    <section class="section" id="identity" aria-labelledby="identity-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">一 · 身份</p>
+          <div>
+            <h2 id="identity-title" class="display">它是什么，不是什么</h2>
+          </div>
+        </div>
+        <div class="faq-layout">
+          <div class="spacer"></div>
+          <div class="faq">
+            <details>
+              <summary>这是 DeepSeek 官方的 App 吗？</summary>
+              <div class="answer"><p>不是。DSH Mobile App 是独立的第三方开源项目，与 DeepSeek、Expo 官方均无关联。它也不是手机本地模型或托管 AI 服务：Agent 与模型留在你自己运行的 DSH 宿主上，手机只负责查看与干预。</p></div>
+            </details>
+            <details>
+              <summary>大肥鱼 / FatWhale 和 DSH Mobile App 是什么关系？</summary>
+              <div class="answer"><p>大肥鱼 FatWhale 是本站（<a href="https://fatwhale.app/">fatwhale.app</a>）使用的独立项目品牌与宠物形象，用来和同名项目区分；产品对外名称始终是 <b>DSH Mobile App</b>。宠物素材来自社区原形象，按 CC BY-NC-SA 4.0 非商业使用，不是本项目原创。</p></div>
+            </details>
+            <details>
+              <summary>官网提供登录、配对或网关代理服务吗？</summary>
+              <div class="answer"><p>不提供。本站只做介绍与入口：不登录、不生成配对码、不代理网关、不承载对话。配对在宿主与 App 之间完成，反馈走 <a href="https://github.com/solla-h/dsh-mobile-app/issues">GitHub Issues</a>。</p></div>
+            </details>
+            <details>
+              <summary>有 iOS 版或应用商店版本吗？</summary>
+              <div class="answer"><p>没有。iOS 暂缓且未验证；Android 版通过 GitHub Releases 侧载安装，没有应用商店版本，也没有在所有 Android 机型上验证过。下载入口见<a href="../download/">APK 下载页</a>。</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="requirements" aria-labelledby="req-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">二 · 前提与版本</p>
+          <div>
+            <h2 id="req-title" class="display">要用起来，得先有什么</h2>
+          </div>
+        </div>
+        <div class="faq-layout">
+          <div class="spacer"></div>
+          <div class="faq">
+            <details>
+              <summary>最少需要准备什么？</summary>
+              <div class="answer"><p>一台持续运行 DSH Web 的宿主、装在对应 profile 里的手机网关插件、一台 Android 手机，以及手机到网关的网络路径（同一 Wi-Fi、隧道或 Tailscale）。宿主工具链需要 Node.js 22.13+、npm、Git 和 pnpm。宿主停机时手机无法继续跟进 Agent。</p></div>
+            </details>
+            <details>
+              <summary>版本可以混搭吗？</summary>
+              <div class="answer"><p>不可以。App、协议、网关插件、DSH 与可选语音包按 <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/compatibility.json">compatibility.json</a> 精确匹配；不匹配时策略是停下来询问，不自动升级任一侧。共享协议号不代表新版本已被支持，详见<a href="../compatibility/">版本兼容说明</a>。</p></div>
+            </details>
+            <details>
+              <summary>语音输入为什么有时不可用？</summary>
+              <div class="answer"><p>语音需要宿主安装与 DSH 版本匹配的语音插件包，并备好识别模型；它是可选附加能力，识别在宿主侧完成。模型未就绪时 App 会明确显示语音不可用，不会静默失败。</p></div>
+            </details>
+            <details>
+              <summary>现在这个版本稳定吗？</summary>
+              <div class="answer"><p>这是公开 alpha，协议与界面仍在演进，不能当作稳定版。当前可下载版本、校验文件与已验证范围以 <a href="https://github.com/solla-h/dsh-mobile-app/releases">GitHub Releases</a> 和 <a href="https://github.com/solla-h/dsh-mobile-app">App 仓库</a>说明为准，本站不写死版本结论。</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="connection" aria-labelledby="conn-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">三 · 连接与离线</p>
+          <div>
+            <h2 id="conn-title" class="display">断线、后台与消息</h2>
+          </div>
+        </div>
+        <div class="faq-layout">
+          <div class="spacer"></div>
+          <div class="faq">
+            <details>
+              <summary>断网时消息会丢吗？</summary>
+              <div class="answer"><p>会话列表、草稿与附件信息缓存在手机上；离线时写的文字进入发件箱，重连后按顺序补发。但发送与执行仍需恢复连接，附件上传和审批决定必须在线。断线瞬间在途的消息可能显示「未确认」，App 不会静默重发，需要手动重试。</p></div>
+            </details>
+            <details>
+              <summary>会有系统推送、后台常驻或永不断线吗？</summary>
+              <div class="answer"><p>当前版本不提供系统推送通知，也不保证后台常驻或永不断线。进入后台后系统会挂起 App，回到前台时再探活重连。「离线保留列表与草稿」不等于「离线也能执行」。</p></div>
+            </details>
+            <details>
+              <summary>多个网关要分别配对吗？</summary>
+              <div class="answer"><p>要。每个网关单独扫码配对，各自保存会话、草稿和发件箱；手机需要能访问对应入口。可选的加密地址簿只加密入口地址，不等于会话端到端加密，也不是使用前提。公网入口必须使用 <code>wss://</code>，App 拒绝明文 <code>ws://</code>。</p></div>
+            </details>
+            <details>
+              <summary>连不上该从哪查起？</summary>
+              <div class="answer"><p>先看网络能否到达网关，再看 DSH Web 与网关进程是否在运行，最后核对 profile、版本锁定与设备是否被撤销。完整顺序与配对前提见<a href="../install/">安装与配对教程</a>。</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="data" aria-labelledby="data-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">四 · 数据与许可</p>
+          <div>
+            <h2 id="data-title" class="display">数据放在哪，代码怎么授权</h2>
+          </div>
+        </div>
+        <div class="faq-layout">
+          <div class="spacer"></div>
+          <div class="faq">
+            <details>
+              <summary>我的数据存在哪里？</summary>
+              <div class="answer"><p>配对凭据保存在手机的安全存储里；会话历史、草稿与附件信息缓存在手机本地。App 没有接入第三方分析 SDK，但宿主、网关和你使用的隧道服务可能各自保留日志；本站另用 Cloudflare Web Analytics 统计页面访问，不使用 Cookie 识别访客。</p></div>
+            </details>
+            <details>
+              <summary>手机丢了怎么办？</summary>
+              <div class="answer"><p>到网关面板撤销这台设备；只在另一台手机上移除网关并不会撤销它。设备被撤销或凭据过期后，App 会停止重连，需要重新配对。二维码、配对串、设备凭据和真实主机地址不要出现在公开截图或 issue 里。</p></div>
+            </details>
+            <details>
+              <summary>采用什么开源许可？</summary>
+              <div class="answer"><p>App 与本站原创代码、文案采用 MIT；App 里的宠物动画素材与本站展示的大肥鱼素材单独采用 CC BY-NC-SA 4.0，仅限非商业使用，需署名并相同方式共享，不属于 MIT。详见 <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/LICENSE">LICENSE</a>、<a href="https://github.com/solla-h/dsh-mobile-app/blob/master/NOTICE">NOTICE</a> 与<a href="../media/ATTRIBUTION.txt">素材署名与许可</a>。</p></div>
+            </details>
+            <details>
+              <summary>遇到问题去哪里反馈？</summary>
+              <div class="answer"><p>请到 <a href="https://github.com/solla-h/dsh-mobile-app/issues">GitHub Issues</a>，附上 App、网关和 DSH 的版本与复现步骤；不要贴配对二维码、设备凭据或未打码的会话截图。</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="next-title">
+      <div class="wrap">
+        <h2 id="next-title" class="display">还有一步，就是试着连上。</h2>
+        <p>Android 公开 alpha，免费开源；下载与版本都以 App 仓库当前文件为准。</p>
+        <div class="more">
+          <a href="../install/">安装与配对教程</a>
+          <a href="../download/">APK 下载页</a>
+          <a href="../compatibility/">版本兼容说明</a>
+          <a href="../">返回官网首页</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <p class="brand"><img class="brand__mark" src="../favicon-32.png" width="32" height="32" alt="">DSH Mobile App</p>
+        <p>大肥鱼 FatWhale 是本站的独立项目品牌；DSH Mobile App 为产品名。Android 公开 alpha，与 DeepSeek、Expo 官方无关。</p>
+        <p>本站原创代码与文案采用 MIT；展示的大肥鱼素材采用 CC BY-NC-SA 4.0，仅限非商业使用。<a href="../media/ATTRIBUTION.txt">素材署名与许可</a></p>
+        <p>本站使用 <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a> 统计页面访问与性能，不使用 Cookie 识别访客。</p>
+      </div>
+      <nav aria-label="页脚链接">
+        <a href="../">首页</a>
+        <a href="../install/">安装教程</a>
+        <a href="../download/">APK 下载</a>
+        <a href="../compatibility/">版本兼容</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app">App 源码</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app/issues">反馈问题</a>
+        <a href="../en/" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

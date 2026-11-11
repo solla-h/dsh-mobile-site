@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://fatwhale.app/compatibility/">
+  <title>DSH Mobile App 版本兼容说明｜大肥鱼 FatWhale</title>
+  <meta name="description" content="DSH Mobile App 版本兼容说明：App、dsh-mobile-v1 协议、手机网关插件、DSH 宿主与可选语音包的锁定组合，精确匹配策略、已验证范围与未覆盖情况。以 App 仓库 compatibility.json 为准。">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f2ed" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#252522" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="大肥鱼 FatWhale · DSH Mobile App">
+  <meta property="og:title" content="DSH Mobile App 版本兼容说明｜大肥鱼 FatWhale">
+  <meta property="og:description" content="锁定组合、精确匹配策略与未覆盖范围。版本以 App 仓库 compatibility.json 和 COMPATIBILITY.md 为准。">
+  <meta property="og:url" content="https://fatwhale.app/compatibility/">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+
+  <header class="masthead">
+    <div class="wrap masthead__inner">
+      <a class="brand" href="../"><img class="brand__mark" src="../favicon-32.png" width="32" height="32" alt="">DSH Mobile App</a>
+      <nav class="nav" aria-label="主要导航">
+        <a href="../install/">安装教程</a>
+        <a href="../compatibility/">版本兼容</a>
+        <a href="../faq/">常见问题</a>
+        <a href="../download/">APK 下载</a>
+      </nav>
+      <a class="lang" href="../en/" hreflang="en" lang="en">EN</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" aria-labelledby="page-title">
+      <div class="wrap">
+        <p class="eyebrow">大肥鱼 FatWhale · 专题指南</p>
+        <h1 id="page-title" class="display">DSH Mobile App 版本兼容说明</h1>
+        <p class="facts__definition">DSH Mobile App 说的是 <code>dsh-mobile-v1</code> 协议，但协议号、手机网关插件和 DSH 宿主各自独立发版：协议号相同，不代表新的 DSH、Node 或插件版本就被支持。本站只做介绍，不替代 App 仓库的锁定文件；本页数值核对于 2026-11-11，实际安装前请以 <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/compatibility.json">compatibility.json</a> 与 <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">COMPATIBILITY.md</a> 的当前内容为准。</p>
+      </div>
+    </section>
+
+    <section class="section section--facts" aria-labelledby="lock-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">锁定组合</p>
+          <div>
+            <h2 id="lock-title" class="display">一套组合，逐项对齐</h2>
+            <p class="intro">下列值来自 App 仓库的机器可读锁定文件；它们不是「最低要求」，而是当前被验证的组合。</p>
+          </div>
+        </div>
+        <dl class="facts">
+          <div class="facts__row">
+            <dt>App 版本</dt>
+            <dd><code>0.1.0</code>，构建 <code>224d30c6</code>。可分发 APK 见 <a href="https://github.com/solla-h/dsh-mobile-app/releases">GitHub Releases</a>；当前为 prerelease 的公开 alpha，本站不写死 APK 文件名，也不使用 <code>/releases/latest</code>。</dd>
+          </div>
+          <div class="facts__row">
+            <dt>协议</dt>
+            <dd><code>dsh-mobile-v1</code>，协议版本 <code>3</code>。网关的 <code>hello</code> 会公布协议号与构建时的 DSH 版本，但不公布插件版本；App 对未验证的协议会给出警告。</dd>
+          </div>
+          <div class="facts__row">
+            <dt>手机网关插件</dt>
+            <dd><code>dsh-plugin-mobile-gateway</code> <code>0.12.0-rdv.3</code>，来源为本项目维护的 GitHub fork 标签 <code>github:solla-h/dsh-plugin-mobile-gateway#v0.12.0-rdv.3</code>，<b>不是同名 npm 发版</b>。该版本包含可选的加密地址簿 <code>rendezvous-v1</code>，并改进了入口健康探测与连接提示；协议号未变。</dd>
+          </div>
+          <div class="facts__row">
+            <dt>DSH 宿主</dt>
+            <dd><code>0.2.1-rc.5</code>。宿主侧安装脚本要求 Node.js 22.13+、npm、Git 与 pnpm（文档锁定 <code>11.9.0</code>）。</dd>
+          </div>
+          <div class="facts__row">
+            <dt>可选语音包</dt>
+            <dd><code>@deepseek-ai/dsh-experimental-voice-input-bundle@0.2.1-rc.5</code>，与 DSH <code>0.2.1-rc.5</code> 精确对应。语音是宿主侧的可选附加能力，不属于网关协议条目；识别模型需另行就绪，旧的 <code>0.1.7-alpha.1</code> 线在该 DSH 版本上被兼容规则禁用。</dd>
+          </div>
+          <div class="facts__row">
+            <dt>已验证范围</dt>
+            <dd>锁定文件记录了一条 Android 真机回归：配对、会话列表、文字回复与按住说话语音，验证日期 2026-11-05。更早构建的实体设备复测结论不自动转移到当前 APK；「已验证」只覆盖表中这套组合与 Android 平台。</dd>
+          </div>
+        </dl>
+        <p class="facts__source">数值与验证记录来自 <a href="https://github.com/solla-h/dsh-mobile-app/blob/master/compatibility.json">compatibility.json</a>、<a href="https://github.com/solla-h/dsh-mobile-app/blob/master/docs/COMPATIBILITY.md">COMPATIBILITY.md</a> 与 <a href="https://github.com/solla-h/dsh-mobile-app/releases">GitHub Releases</a>；发版信息会变化，不要靠记忆补。</p>
+      </div>
+    </section>
+
+    <section class="section" id="policy" aria-labelledby="policy-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">匹配策略</p>
+          <div>
+            <h2 id="policy-title" class="display">不匹配时，停下来</h2>
+            <p class="intro">锁定文件把策略写成了机器可读字段，不是一句「建议」。</p>
+          </div>
+        </div>
+
+        <div class="ledger__labels" aria-hidden="true"><span></span><span>策略</span><span>实际含义</span></div>
+        <ul class="ledger">
+          <li>
+            <h3>requireExactMatch: true</h3>
+            <p><span class="tag">前提</span>只使用 <code>recommended</code> 中的精确版本。共享同一协议号并不构成支持新 DSH、Node 或插件版本的证据。</p>
+          </li>
+          <li>
+            <h3>onMismatch: stop-and-ask</h3>
+            <p><span class="tag">前提</span>宿主上的 DSH 或插件版本不一致时，停下来核对并询问，不要自动升级任意一侧，也不要「先装着试试」。</p>
+          </li>
+          <li>
+            <h3>allowLocalCheckout: false</h3>
+            <p><span class="tag">前提</span>不要用本地 <code>git clone</code>、<code>link:</code> 依赖或 profile 备份安装网关；上游插件与本项目维护的 fork 不能同时安装，也不能因为版本字符串相同就替换来源。</p>
+          </li>
+          <li>
+            <h3>语音单独核对</h3>
+            <p><span class="tag">前提</span>语音包是宿主侧可选附加项，与 DSH 版本精确对应，模型也需就绪；它不随网关协议条目一起被「带过来」。</p>
+          </li>
+        </ul>
+
+        <div class="preflight">
+          <b>未覆盖</b>
+          <p>iOS；<code>0.2.1-rc.5</code> 以外的 DSH 版本；上述已验证与推荐条目以外的网关版本；从本地 clone 或 <code>link:</code> 依赖安装。文档里的「未覆盖」意思是停下来询问，不是试一试；也不代表所有 Android 机型都已验证。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">常见疑问</p>
+          <div>
+            <h2 id="faq-title" class="display">关于版本，最常问的三件事</h2>
+          </div>
+        </div>
+        <div class="faq-layout">
+          <div class="spacer"></div>
+          <div class="faq">
+            <details>
+              <summary>可以用 <code>@latest</code> 装网关吗？</summary>
+              <div class="answer"><p>不可以。网关来源是带精确 GitHub 标签的 fork，不是 npm 版本线；使用 <code>@latest</code>、本地 checkout 或同名上游包都会脱离已验证组合。安装脚本会读取锁定文件并校验已安装包的来源与版本。</p></div>
+            </details>
+            <details>
+              <summary>协议号一样，为什么还要锁 DSH 和插件版本？</summary>
+              <div class="answer"><p>网关的 <code>hello</code> 只公布协议号与构建时的 DSH 版本，不公布插件版本；协议号相同不代表新版本的上游依赖、行为或宿主能力已被验证。兼容说明把这一点列为前提，而不是可选项。</p></div>
+            </details>
+            <details>
+              <summary>升级 APK 会不会改变兼容组合？</summary>
+              <div class="answer"><p>以新版本 App 仓库当前的 <code>compatibility.json</code> 为准重新核对，不要把旧页面的数值沿用过去。升级 APK 时直接覆盖安装、不要先卸载；若宿主侧组合已不在锁定范围，先停下来确认再继续。完整安装顺序见<a href="../install/">安装与配对教程</a>。</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="next-title">
+      <div class="wrap">
+        <h2 id="next-title" class="display">版本对齐了，就可以动手。</h2>
+        <p>本站只做介绍与入口，不承担登录、配对、网关代理或对话服务；具体命令以 App 仓库文档为准。</p>
+        <div class="more">
+          <a href="../install/">安装与配对教程</a>
+          <a href="../download/">APK 下载页</a>
+          <a href="../faq/">常见问题</a>
+          <a href="../">返回官网首页</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <p class="brand"><img class="brand__mark" src="../favicon-32.png" width="32" height="32" alt="">DSH Mobile App</p>
+        <p>大肥鱼 FatWhale 是本站的独立项目品牌；DSH Mobile App 为产品名。Android 公开 alpha，与 DeepSeek、Expo 官方无关。</p>
+        <p>本站原创代码与文案采用 MIT；展示的大肥鱼素材采用 CC BY-NC-SA 4.0，仅限非商业使用。<a href="../media/ATTRIBUTION.txt">素材署名与许可</a></p>
+        <p>本站使用 <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a> 统计页面访问与性能，不使用 Cookie 识别访客。</p>
+      </div>
+      <nav aria-label="页脚链接">
+        <a href="../">首页</a>
+        <a href="../install/">安装教程</a>
+        <a href="../download/">APK 下载</a>
+        <a href="../faq/">常见问题</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app">App 源码</a>
+        <a href="https://github.com/solla-h/dsh-mobile-app/issues">反馈问题</a>
+        <a href="../en/" hreflang="en" lang="en">English</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

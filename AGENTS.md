@@ -13,6 +13,8 @@
 - 网站提供简体中文和英文；App 的 i18n 和 iOS 版本都暂缓，不要宣称 iOS 可用。
 - 产品对外名称固定为 **DSH Mobile App**；不要使用另一个项目的名称 DSH Mobile。英文示意须完整英文化，并注明实际 App 界面仍为简体中文。
 - 搜索优化与站长统计方案见 [docs/DISCOVERY.md](docs/DISCOVERY.md)。不虚构评价、下载量或搜索排名收益。
+- 站点品牌为「大肥鱼 / FatWhale」，用于 title、description、og 与对外介绍，以便和同名项目区分；它**不替代**产品名 DSH Mobile App，也不代表官方组织或与 DeepSeek 的关联。
+- 另有四个中文专题页：<https://fatwhale.app/install/>、<https://fatwhale.app/compatibility/>、<https://fatwhale.app/faq/>、<https://fatwhale.app/download/>，每页对准一个查询意图；英文页提供中文专题入口，不宣称专题页已有英文版。
 
 ## 事实来源（只读）
 
@@ -43,12 +45,15 @@ App 仓库新增特性、改协议或发新版时，本站是**只读消费方**
 2. **定位影响面**：按 [docs/BRIEF.md](docs/BRIEF.md) 的「内容槽位」与「事实边界」判断
    首屏、核心场景、细节与前提、三步开始、FAQ 和两页「一眼看清」事实块哪些要改。
 3. **同步两页**：`site/index.html` 与 `site/en/index.html` 同一批修改；英文页完整英文化，
-   并保留「实际 App 界面仍为简体中文」的说明。产品名始终写 **DSH Mobile App**。
+   并保留「实际 App 界面仍为简体中文」的说明。产品名始终写 **DSH Mobile App**，站点品牌词写进
+   两页的 title/description/og；事实变化同时核对四个专题页，避免首页与专题页口径不一致。
 4. **同步交接文档**：事实边界或槽位变了改 `docs/BRIEF.md`；搜索、统计或页面元数据变了改
-   `docs/DISCOVERY.md`；只有新增/删除页面才改 `site/sitemap.xml`，一般不动 `robots.txt`。
-   若品牌、canonical、hreflang、JSON-LD 或页面集合的契约要变，改 `scripts/check_site.py`
-   并补回归用例，不放宽既有检查。在 `docs/BRIEF.md` 记一条同步基线（日期 + 对齐的 App 提交
-   或 Release），便于下次判断哪些还没同步。
+   `docs/DISCOVERY.md`；新增/删除页面同时改 `site/sitemap.xml` 与中英首页的专题入口，
+   一般不动 `robots.txt`。
+   若品牌、canonical、hreflang、WebSite / SoftwareApplication JSON-LD 或页面集合的契约要变，
+   改 `scripts/check_site.py` 并补回归用例，不放宽既有检查。SoftwareApplication 的
+   `downloadUrl` 固定为 Releases 入口，不写死 APK 文件名、`/releases/latest`、软件版本或评分。
+   在 `docs/BRIEF.md` 记一条同步基线（日期 + 对齐的 App 提交或 Release），便于下次判断哪些还没同步。
 5. **验证与发布**：跑 `python -I scripts/check_site.py`、
    `python -I scripts/test_check_site.py`、`node scripts/test_demo.mjs`，本地预览两页，
    再按 [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) 的更新流程发布；push 前须获用户授权。

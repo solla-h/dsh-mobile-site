@@ -1,6 +1,6 @@
 # DSH Mobile App 官方介绍网站
 
-DSH Mobile App 的官方介绍网站仓库（官网 <https://fatwhale.app/>，含中文与英文两页）；
+DSH Mobile App 的官方介绍网站仓库（官网 <https://fatwhale.app/>，含中英两页与四个中文专题页）；
 App 为第三方开源 Android 客户端，与 DeepSeek 官方无关。
 生产分支 `main`，唯一可部署目录是 `site/`。
 
@@ -23,8 +23,9 @@ python3 -I scripts/check_site.py   # Linux / macOS / CI
 python -I scripts/check_site.py    # Windows 没有 python3 命令时
 ```
 
-脚本只使用 Python 标准库：检查文档基础、本地资源、品牌名称、英文残留、
-canonical/hreflang、站点名称 JSON-LD、robots 和 sitemap。检查器回归测试使用
+脚本只使用 Python 标准库：检查文档基础、本地资源、产品名与站点品牌词、英文残留、
+canonical/hreflang、WebSite 与 SoftwareApplication JSON-LD、四个专题页的
+canonical / 主题词 / 站内链接、robots 和 sitemap。检查器回归测试使用
 `python3 -I scripts/test_check_site.py`（Windows 用 `python -I`）。
 交互演示的纯手势逻辑使用 `node scripts/test_demo.mjs` 检查，仅用 Node 内置断言，
 不需要 npm 或安装依赖；网站仍是直接部署的静态文件。
@@ -35,10 +36,15 @@ Pages 执行静态检查作为发布门槛，通过后只发布 `site/`。
 ## 目录
 
 ```text
-site/                  # 唯一部署输出；index.html（中文）、en/index.html（英文）、styles.css
+site/                  # 唯一部署输出；中英首页、四个中文专题页、样式与站点文件
+  index.html           # 中文首页
+  en/index.html        # 英文首页
+  install/ compatibility/ faq/ download/   # 四个中文专题页，各自 index.html
+  sitemap.xml / robots.txt
 scripts/check_site.py  # 本地与 CI 共用的静态检查
 docs/BRIEF.md          # 内容槽位、布局、事实边界与验收
 docs/DEPLOYMENT.md     # Cloudflare Pages Git 集成、更新与回滚
+docs/DISCOVERY.md      # 搜索、结构化数据与站长统计边界
 AGENTS.md              # 后续 Claude 的工作边界
 ```
 
