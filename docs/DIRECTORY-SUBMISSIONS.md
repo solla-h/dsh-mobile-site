@@ -110,3 +110,18 @@ description:
 - dsh.plus 的 Turnstile、DSH Hub 的登录态属于账号级人机/身份校验，只能由账号本人在已登录环境完成；可程序化的通道仅限 GitHub Discussions（`gh` / GraphQL）与列表 PR。
 - 投稿文案中的站内链接（`fatwhale.app/install/` 等）必须先确认线上已发布，否则会留下 404 外链。
 - 收录、外链与流量效果都要在提交并发布之后观察，不从此清单推断排名收益。
+
+## 执行记录（2026-11-11）
+
+经用户明确授权后执行；发布与线上验证先于投稿完成，站内链接均已生效。
+
+| 渠道 | 结果 | 链接 |
+| --- | --- | --- |
+| DeepSeek Harness Discussions | 已发布到「Show Your Plugins!」分类，社区项目口径，发文前全库查重无重复 | <https://github.com/deepseek-ai/deepseek-harness/discussions/12942> |
+| DSH 插件目录（awesome list） | 已提 PR，仅新增 `data/plugins/solla-h__dsh-plugin-mobile-gateway.yml`；PR 正文已披露该仓库是上游 `Clarklevis1995` 条目的 fork，可能被判重复 | <https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/14265> |
+| dsh.plus | 未提交：表单有 Turnstile 人机验证且投稿者邮箱必填，须由账号本人填写 | <https://dsh.plus/zh/submit> |
+| DSH Hub | 未提交：需先 Sign In（verified account）才能看到提交表单；`hello@dsh-hub.org` 是联系邮箱而非投稿入口 | <https://dsh-hub.org/submit> |
+
+配套动作：按列表规则给 `solla-h/dsh-plugin-mobile-gateway` 补了 `dsh-plugin` topic；站点已 push 到 `main` 并由 Cloudflare Pages 部署（提交 `c5e418f`）。
+
+> 重复投稿提醒：以上两个编号就是「已投过」的凭据，后续不要再向同一站点提交同一仓库；PR 若被合并或关闭，回来更新本表状态。
