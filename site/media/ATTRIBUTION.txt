@@ -34,3 +34,9 @@ the app; no endorsement by the artists or DeepSeek is implied.
 宠物原素材及本站静态衍生图不属于网站 MIT 许可范围。再使用时须按上述
 许可署名、仅用于非商业用途，并对改编作品采用相同许可。本站用于非商业
 展示 App 中的宠物形象，不表示原作者或 DeepSeek 为本项目背书。
+
+Social share images / 社交分享图:
+- og-cover.png, og-cover-en.png: 1200x630 derivatives of da-fei-yu.webp
+  (same pet still, composed with the site title and tagline). Same
+  CC BY-NC-SA 4.0 terms as the source still; not covered by the MIT license.
+  分享图由 da-fei-yu.webp 静态帧加站名与标语合成，许可与来源同上，不属于 MIT。
