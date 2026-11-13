@@ -46,6 +46,35 @@ Windows 使用 `python -I`。线上还需验证状态码、生产响应没有 `n
 sitemap 扩为六个 URL；已提交的 sitemap 会由搜索引擎自行重抓，不重复提交，也不对已收录页面重复请求编入索引。
 本地检查器新增内容页、SoftwareApplication 与品牌词校验，回归用例从 7 项增至 15 项；`python -I scripts/check_site.py`、`python -I scripts/test_check_site.py`、`node scripts/test_demo.mjs` 均通过，六个页面本地预览均返回 200。上线与收录效果仍需发布后观察。
 
+### 2026-11-13：P0 修复（软 404、分享图、结构化数据、sitemap lastmod）
+
+第三方 SEO 体检（豆包）指出的问题经实测属实后落地，改动见本次 PR：
+
+- **软 404**：任意不存在的路径此前返回 200 + 首页内容。新增 `site/404.html`，
+  Cloudflare Pages 对未匹配路径返回 404 状态码。
+- **分享图**：六页此前均无 `og:image` / Twitter 卡片。新增 `site/og-cover.png`
+  （中文页）与 `site/og-cover-en.png`（英文页），1200×630，由本站已授权的
+  `da-fei-yu.webp` 静态帧加站名与标语合成，衍生图许可与来源见
+  `site/media/ATTRIBUTION.txt`；六页补齐 `og:image`（含宽高与 alt）、
+  `twitter:card=summary_large_image` 与 `twitter:image`。
+- **FAQPage**：`/faq/` 的 16 组问答此前无结构化标注，新增 `FAQPage` JSON-LD，
+  答案文本与页面可见文本逐字一致。注意：Google 已于 2023 年起对绝大多数站点
+  停发 FAQ 富媒体结果，本次加注的目的不是拿问答折叠展示，而是让问答结构可被
+  搜索引擎与 AI 摘要直接读取；这与 2026-11-10「不做 FAQPage」的决定不同，
+  是本次按用户要求的有意改动。
+- **BreadcrumbList**：四个中文专题页新增 `BreadcrumbList` JSON-LD（首页 > 专题页），
+  不另加可见面包屑，导航栏已承担该作用。
+- **sitemap lastmod**：六个 URL 补 `<lastmod>2026-11-13</lastmod>`。与此前
+  「不添加没有维护依据的 lastmod」的决定不同，本次起立新规：**改动某页内容时
+  同步更新该页的 lastmod**，避免过期日期误导抓取。
+- **hreflang x-default**：两页各补一条 `x-default` 指向中文首页
+  `https://fatwhale.app/`。
+
+未动的决定：SoftwareApplication 仍不补 `softwareVersion` / `offers` / 评分
+（检查器 `FORBIDDEN_SOFTWARE_FIELDS` 保持不变）；仍不做 `llms.txt` 与隐藏关键词。
+Bing 侧仍待在 Bing Webmaster Tools 点 Verify 并提交 sitemap（`BingSiteAuth.xml`
+已部署），不在本次 PR 范围内。
+
 ## 站长统计
 
 已启用免费的 **Cloudflare Web Analytics / Pages 集成**，由 Pages 在后续部署中自动注入一次信标；仓库不复制 Token、不安装统计 SDK。查看入口为 Pages 项目 → Metrics → View Web Analytics；分析正式网站时按 Host 筛选 `fatwhale.app`，避免预览访问混入。普通 Wrangler Pages 命令没有启用开关；官方 API 创建统计站点需要 Account Settings Write，当前 Wrangler OAuth 对 RUM 接口返回权限不足，可使用已有登录的控制台一次开通。
