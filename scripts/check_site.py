@@ -7,11 +7,14 @@ Usage:
 Checks every HTML file under site/ for a non-empty <html lang>, <title> and
 viewport meta, then verifies that local href/src references and CSS url()
 resources exist inside site/. Also enforces the site contract: both landing
-pages' title/description/canonical/hreflang/WebSite + SoftwareApplication
-JSON-LD and FatWhale site brand, the four Chinese topic pages and their
-canonicals/topics/internal links, robots.txt, sitemap.xml, the DSH Mobile App
-brand name, and no Chinese left in English content outside the zh-CN language
-switches. No third-party dependencies.
+pages' title/description/canonical/hreflang (including x-default)/WebSite +
+SoftwareApplication JSON-LD and FatWhale site brand, the four Chinese topic
+pages and their canonicals/topics/internal links/BreadcrumbList JSON-LD,
+the FAQ page's FAQPage JSON-LD (answers match visible text), share images
+(og:image + Twitter card) on all six pages, site/404.html, robots.txt,
+sitemap.xml with a <lastmod> on every URL, the DSH Mobile App brand name,
+and no Chinese left in English content outside the zh-CN language switches.
+No third-party dependencies.
 """
 
 from __future__ import annotations
@@ -20,6 +23,7 @@ import json
 import re
 import sys
 import xml.etree.ElementTree as ET
+from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -52,6 +56,9 @@ SITEMAP_LOCS = set(EXPECTED_PAGES.values()) | {
 }
 FORBIDDEN_SOFTWARE_FIELDS = {"aggregateRating", "review", "softwareVersion", "offers"}
 OLD_BRAND_RE = re.compile(r"DSH\s+Mobile(?!\s+App)")
+LASTMOD_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+OG_IMAGE = SITE_URL + "og-cover.png"
+OG_IMAGE_EN = SITE_URL + "og-cover-en.png"
 CJK_RE = re.compile(r"[㐀-䶿一-鿿豈-﫿]")
 ROBOTS_SITEMAP_RE = re.compile(r"sitemap:\s*https://fatwhale\.app/sitemap\.xml", re.IGNORECASE)
 ROBOTS_DISALLOW_ALL_RE = re.compile(r"disallow:\s*/\s*", re.IGNORECASE)
@@ -78,6 +85,13 @@ class PageParser(HTMLParser):
         self.viewport = ""
         self.description = ""
         self.og_site_name = ""
+        self.og_image = ""
+        self.og_image_width = ""
+        self.og_image_height = ""
+        self.og_image_alt = ""
+        self.twitter_card = ""
+        self.twitter_image = ""
+        self.text_parts: list[str] = []
         self.noindex = False
         self.canonicals: list[str] = []
         self.hreflangs: list[tuple[str, str]] = []
@@ -101,15 +115,29 @@ class PageParser(HTMLParser):
             self._in_title = True
         elif tag == "meta":
             name = values.get("name", "").strip().lower()
+            prop = values.get("property", "").strip().lower()
+            content = values.get("content", "").strip()
             if name == "viewport":
-                self.viewport = values.get("content", "").strip()
+                self.viewport = content
             elif name == "description":
-                self.description = values.get("content", "").strip()
+                self.description = content
             elif name in {"robots", "googlebot"}:
-                directives = re.split(r"[\s,]+", values.get("content", "").lower())
+                directives = re.split(r"[\s,]+", content.lower())
                 self.noindex |= bool({"noindex", "none"}.intersection(directives))
-            elif values.get("property", "").strip().lower() == "og:site_name":
-                self.og_site_name = values.get("content", "").strip()
+            elif name == "twitter:card":
+                self.twitter_card = content
+            elif name == "twitter:image":
+                self.twitter_image = content
+            elif prop == "og:site_name":
+                self.og_site_name = content
+            elif prop == "og:image":
+                self.og_image = content
+            elif prop == "og:image:width":
+                self.og_image_width = content
+            elif prop == "og:image:height":
+                self.og_image_height = content
+            elif prop == "og:image:alt":
+                self.og_image_alt = content
         elif tag == "link":
             rels = values.get("rel", "").lower().split()
             href = values.get("href", "").strip()
@@ -152,6 +180,8 @@ class PageParser(HTMLParser):
                 self._jsonld_parts = []
                 self._in_jsonld = False
             self._in_script = False
+        if tag in {"p", "div", "li", "details", "summary"} | {f"h{n}" for n in range(1, 7)}:
+            self.text_parts.append(" ")
 
     def handle_data(self, data: str) -> None:
         if self._in_title:
@@ -160,12 +190,19 @@ class PageParser(HTMLParser):
             self._jsonld_parts.append(data)
         if self._in_script:
             return
+        self.text_parts.append(data)
         if CJK_RE.search(data) and not (self._zh_anchor and self._zh_anchor[-1]):
             self.chinese_leaks.append("text")
 
     @property
     def title(self) -> str:
         return " ".join("".join(self.title_parts).split())
+
+    @property
+    def visible_text(self) -> str:
+        """Page text as a reader sees it: tags contribute nothing, block
+        boundaries separate, whitespace collapsed."""
+        return re.sub(r"\s+", " ", "".join(self.text_parts)).strip()
 
 
 def is_local_ref(ref: str) -> bool:
@@ -337,6 +374,105 @@ def check_brand_positioning(pages: dict[str, PageParser], errors: list[str]) -> 
             errors.append(f'{label}: og:site_name must contain "{BRAND_ALIAS}"')
 
 
+def jsonld_items(parser: PageParser) -> list[dict]:
+    items: list[dict] = []
+    for raw in parser.jsonld:
+        try:
+            data = json.loads(raw)
+        except json.JSONDecodeError:
+            continue  # already reported by check_website_jsonld
+        for item in data if isinstance(data, list) else [data]:
+            if isinstance(item, dict):
+                items.append(item)
+    return items
+
+
+def check_share_images(pages: dict[str, PageParser], errors: list[str]) -> None:
+    for rel in list(EXPECTED_PAGES) + list(CONTENT_PAGES):
+        parser = pages.get(rel)
+        label = f"site/{rel}"
+        if parser is None:
+            continue
+        expected = OG_IMAGE_EN if rel == "en/index.html" else OG_IMAGE
+        if parser.og_image != expected:
+            errors.append(f"{label}: og:image must be {expected}")
+        if parser.og_image_width != "1200" or parser.og_image_height != "630":
+            errors.append(f"{label}: og:image must declare 1200x630")
+        if not parser.og_image_alt:
+            errors.append(f"{label}: og:image needs a non-empty alt")
+        if parser.twitter_card != "summary_large_image":
+            errors.append(f"{label}: twitter:card must be summary_large_image")
+        if parser.twitter_image != expected:
+            errors.append(f"{label}: twitter:image must match og:image")
+
+
+def check_faq_jsonld(pages: dict[str, PageParser], errors: list[str]) -> None:
+    parser = pages.get("faq/index.html")
+    label = "site/faq/index.html"
+    if parser is None:
+        errors.append(f"{label}: missing FAQ page")
+        return
+    faq = None
+    for item in jsonld_items(parser):
+        if item.get("@type") == "FAQPage":
+            faq = item
+    if faq is None:
+        errors.append(f"{label}: missing FAQPage JSON-LD")
+        return
+    entities = faq.get("mainEntity")
+    if not isinstance(entities, list) or not entities:
+        errors.append(f"{label}: FAQPage needs a non-empty mainEntity list")
+        return
+    visible = parser.visible_text
+    for entity in entities:
+        if not isinstance(entity, dict) or entity.get("@type") != "Question":
+            errors.append(f"{label}: FAQPage mainEntity entries must be Questions")
+            continue
+        question = entity.get("name", "")
+        answer = entity.get("acceptedAnswer", {})
+        answer_text = answer.get("text", "") if isinstance(answer, dict) else ""
+        norm = lambda s: re.sub(r"\s+", " ", str(s)).strip()
+        if not question or norm(question) not in visible:
+            errors.append(f"{label}: FAQPage question not found in visible text: {question!r}")
+        if not answer_text or norm(answer_text) not in visible:
+            errors.append(f"{label}: FAQPage answer not found in visible text: {question!r}")
+
+
+def check_breadcrumb_jsonld(pages: dict[str, PageParser], errors: list[str]) -> None:
+    for rel, (canonical, topic) in CONTENT_PAGES.items():
+        parser = pages.get(rel)
+        label = f"site/{rel}"
+        if parser is None:
+            continue
+        crumbs = None
+        for item in jsonld_items(parser):
+            if item.get("@type") == "BreadcrumbList":
+                crumbs = item
+        if crumbs is None:
+            errors.append(f"{label}: missing BreadcrumbList JSON-LD")
+            continue
+        elements = crumbs.get("itemListElement")
+        if not isinstance(elements, list) or len(elements) != 2:
+            errors.append(f"{label}: BreadcrumbList needs exactly two items (home, this page)")
+            continue
+        first, second = elements
+        if not isinstance(first, dict) or first.get("item") != SITE_URL:
+            errors.append(f"{label}: BreadcrumbList first item must be {SITE_URL}")
+        if not isinstance(second, dict) or second.get("item") != canonical:
+            errors.append(f"{label}: BreadcrumbList second item must be {canonical}")
+        if not isinstance(second, dict) or not str(second.get("name", "")).strip():
+            errors.append(f"{label}: BreadcrumbList second item needs a name")
+
+
+def check_404(pages: dict[str, PageParser], errors: list[str]) -> None:
+    parser = pages.get("404.html")
+    if parser is None:
+        errors.append("site/404.html is missing (unknown paths must return 404, not the homepage)")
+        return
+    if "404" not in parser.title and "找不到" not in parser.title:
+        errors.append("site/404.html: <title> must say the page was not found")
+
+
 def check_content_pages(pages: dict[str, PageParser], errors: list[str]) -> None:
     for rel, (canonical, topic) in CONTENT_PAGES.items():
         parser = pages.get(rel)
@@ -383,6 +519,8 @@ def check_bilingual(pages: dict[str, PageParser], errors: list[str]) -> None:
         for lang, href in EXPECTED_HREFLANGS.items():
             if hreflangs.get(lang) != href:
                 errors.append(f"{label}: hreflang {lang} must point to {href}")
+        if hreflangs.get("x-default") != SITE_URL:
+            errors.append(f"{label}: hreflang x-default must point to {SITE_URL}")
 
         check_website_jsonld(parser, label, errors)
         check_software_jsonld(parser, label, errors)
@@ -414,7 +552,17 @@ def check_sitemap(errors: list[str]) -> None:
     locs = [(element.text or "").strip() for element in root.findall(f"{namespace}url/{namespace}loc")]
     if len(locs) != len(SITEMAP_LOCS) or set(locs) != SITEMAP_LOCS:
         expected = " and ".join(sorted(SITEMAP_LOCS))
-        errors.append(f"site/sitemap.xml: must list exactly two URLs: {expected}")
+        errors.append(f"site/sitemap.xml: must list exactly these URLs: {expected}")
+    for element in root.findall(f"{namespace}url"):
+        loc = (element.findtext(f"{namespace}loc") or "").strip()
+        lastmod = (element.findtext(f"{namespace}lastmod") or "").strip()
+        if not LASTMOD_RE.match(lastmod):
+            errors.append(f"site/sitemap.xml: {loc or 'a URL'} needs a <lastmod> date (YYYY-MM-DD)")
+            continue
+        try:
+            datetime.strptime(lastmod, "%Y-%m-%d")
+        except ValueError:
+            errors.append(f"site/sitemap.xml: {loc} has an invalid <lastmod> date: {lastmod}")
 
 
 def check_robots(errors: list[str]) -> None:
@@ -461,6 +609,10 @@ def main() -> int:
     check_bilingual(pages, errors)
     check_brand_positioning(pages, errors)
     check_content_pages(pages, errors)
+    check_share_images(pages, errors)
+    check_faq_jsonld(pages, errors)
+    check_breadcrumb_jsonld(pages, errors)
+    check_404(pages, errors)
     check_sitemap(errors)
     check_robots(errors)
 
