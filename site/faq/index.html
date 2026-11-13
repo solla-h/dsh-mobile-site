@@ -15,9 +15,171 @@
   <meta property="og:title" content="DSH Mobile App 常见问题 FAQ｜大肥鱼 FatWhale">
   <meta property="og:description" content="身份、前提、版本、连接、数据、许可——按主题分组的常见问题与明确边界。">
   <meta property="og:url" content="https://fatwhale.app/faq/">
+  <meta property="og:image" content="https://fatwhale.app/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="大肥鱼 FatWhale · DSH Mobile App——DeepSeek Harness 远程安卓客户端">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://fatwhale.app/og-cover.png">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
   <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
   <link rel="stylesheet" href="../styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://fatwhale.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "常见问题",
+      "item": "https://fatwhale.app/faq/"
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "这是 DeepSeek 官方的 App 吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不是。DSH Mobile App 是独立的第三方开源项目，与 DeepSeek、Expo 官方均无关联。它也不是手机本地模型或托管 AI 服务：Agent 与模型留在你自己运行的 DSH 宿主上，手机只负责查看与干预。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "大肥鱼 / FatWhale 和 DSH Mobile App 是什么关系？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "大肥鱼 FatWhale 是本站（fatwhale.app）使用的独立项目品牌与宠物形象，用来和同名项目区分；产品对外名称始终是 DSH Mobile App。宠物素材来自社区原形象，按 CC BY-NC-SA 4.0 非商业使用，不是本项目原创。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "官网提供登录、配对或网关代理服务吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不提供。本站只做介绍与入口：不登录、不生成配对码、不代理网关、不承载对话。配对在宿主与 App 之间完成，反馈走 GitHub Issues。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "有 iOS 版或应用商店版本吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "没有。iOS 暂缓且未验证；Android 版通过 GitHub Releases 侧载安装，没有应用商店版本，也没有在所有 Android 机型上验证过。下载入口见APK 下载页。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "最少需要准备什么？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "一台持续运行 DSH Web 的宿主、装在对应 profile 里的手机网关插件、一台 Android 手机，以及手机到网关的网络路径（同一 Wi-Fi、隧道或 Tailscale）。宿主工具链需要 Node.js 22.13+、npm、Git 和 pnpm。宿主停机时手机无法继续跟进 Agent。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "版本可以混搭吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不可以。App、协议、网关插件、DSH 与可选语音包按 compatibility.json 精确匹配；不匹配时策略是停下来询问，不自动升级任一侧。共享协议号不代表新版本已被支持，详见版本兼容说明。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "语音输入为什么有时不可用？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "语音需要宿主安装与 DSH 版本匹配的语音插件包，并备好识别模型；它是可选附加能力，识别在宿主侧完成。模型未就绪时 App 会明确显示语音不可用，不会静默失败。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "现在这个版本稳定吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "这是公开 alpha，协议与界面仍在演进，不能当作稳定版。当前可下载版本、校验文件与已验证范围以 GitHub Releases 和 App 仓库说明为准，本站不写死版本结论。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "断网时消息会丢吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "会话列表、草稿与附件信息缓存在手机上；离线时写的文字进入发件箱，重连后按顺序补发。但发送与执行仍需恢复连接，附件上传和审批决定必须在线。断线瞬间在途的消息可能显示「未确认」，App 不会静默重发，需要手动重试。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "会有系统推送、后台常驻或永不断线吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "当前版本不提供系统推送通知，也不保证后台常驻或永不断线。进入后台后系统会挂起 App，回到前台时再探活重连。「离线保留列表与草稿」不等于「离线也能执行」。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "多个网关要分别配对吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "要。每个网关单独扫码配对，各自保存会话、草稿和发件箱；手机需要能访问对应入口。可选的加密地址簿只加密入口地址，不等于会话端到端加密，也不是使用前提。公网入口必须使用 wss://，App 拒绝明文 ws://。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "连不上该从哪查起？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "先看网络能否到达网关，再看 DSH Web 与网关进程是否在运行，最后核对 profile、版本锁定与设备是否被撤销。完整顺序与配对前提见安装与配对教程。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "我的数据存在哪里？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "配对凭据保存在手机的安全存储里；会话历史、草稿与附件信息缓存在手机本地。App 没有接入第三方分析 SDK，但宿主、网关和你使用的隧道服务可能各自保留日志；本站另用 Cloudflare Web Analytics 统计页面访问，不使用 Cookie 识别访客。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "手机丢了怎么办？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "到网关面板撤销这台设备；只在另一台手机上移除网关并不会撤销它。设备被撤销或凭据过期后，App 会停止重连，需要重新配对。二维码、配对串、设备凭据和真实主机地址不要出现在公开截图或 issue 里。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "采用什么开源许可？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "App 与本站原创代码、文案采用 MIT；App 里的宠物动画素材与本站展示的大肥鱼素材单独采用 CC BY-NC-SA 4.0，仅限非商业使用，需署名并相同方式共享，不属于 MIT。详见 LICENSE、NOTICE 与素材署名与许可。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "遇到问题去哪里反馈？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "请到 GitHub Issues，附上 App、网关和 DSH 的版本与复现步骤；不要贴配对二维码、设备凭据或未打码的会话截图。"
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">跳到正文</a>
